@@ -1,0 +1,40 @@
+// .logos {
+//   display: flex;
+//   flex-wrap: wrap;
+//   text-align: center;
+//   justify-content: center;
+//   align-items: center;
+//   align-content: space-between;
+//   span {
+//     display: inline-block;
+//     margin: 20px;
+//     flex-grow: 1;
+//   }
+// }
+.logos {
+  height: 115px;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+  .photobanner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    white-space: nowrap;
+    animation: bannermove 10s linear infinite;
+    width: 1320px;
+    span {
+      margin: 0 0.5em;
+      width: 157px;
+    }
+  }
+}
+
+@keyframes bannermove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-1530px, 0);
+  }
+}

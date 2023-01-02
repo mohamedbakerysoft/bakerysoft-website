@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="../main.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../node_modules/owl.carousel/dist/assets/owl.carousel.min.css" />
+   
+</head>
+<body class="100-vh">
+        <!-- Contact -->
+        <section id="contact" class="contact-us gray-light-bg ptb-100">
+            <div class="overlay"></div>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55257.46249344313!2d30.956780668488012!3d30.04857795759434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14585a29f1b324d9%3A0xc5c5525706430b8d!2sSheikh%20Zayed%20City%2C%20Giza%20Governorate!5e0!3m2!1sen!2seg!4v1655405217871!5m2!1sen!2seg"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 pb-3 message-box d-none">
+                        <div class="alert alert-danger"></div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="section-heading">
+                            <h2>Contact With Us</h2>
+                            <p>It's very easy to get in touch with us. Just use the contact form or pay us a
+                                visit for a coffee at the office. Dynamically innovate competitive technology after an
+                                expanded array of leadership.</p>
+                        </div>
+                        <div class="footer-address">
+                            <h6><strong>Head Office</strong></h6>
+                            <p>27 Zayed city main axis, Ebda3 capital, Egypt</p>
+                            <ul>
+                                <!-- <li><span><strong>Phone:</strong> +61 2 8376 6284</span></li> -->
+                                <!-- <li><span><strong>Email:</strong> <a -->
+                                            <!-- href="mailto:hello@yourdomain.com">hello@yourdomain.com</a></span> -->
+                                <!-- </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <form action= "./contactUs/index.php" method="POST" id="contactForm" class="contact-us-form" novalidate="true">
+                            <h5>Reach us quickly</h5>
+                            <div class="row">
+                                <div class="col-sm-6 col-12">
+                                    <div class="form-group has-error">
+                                        <input type="text" class="form-control" value="" name="name" id="name"
+                                            placeholder="Enter name" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" value="" name="email" id="email"
+                                            placeholder="Enter email" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <input type="number" name="phone" value="" class="form-control" id="phone"
+                                            placeholder="Your Phone" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-12">
+                                 <div class="form-group">
+                                   <select class="form-control" name="needs" id="">
+                                     <option value="">What do you need?</option>
+                                     <option value="Design">web Design </option>
+                                     <option value="Development">web Development</option>
+                                     <option value="exscript">Existing Script</option>
+                                    <option value="others">Others</option>
+                                   </select>
+                                 </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <grammarly-extension data-grammarly-shadow-root="true"
+                                        style="position: absolute; top: 0px; left: 0px; pointer-events: none;"
+                                        class="cGcvT"></grammarly-extension>
+                                    <grammarly-extension data-grammarly-shadow-root="true"
+                                        style="mix-blend-mode: darken; position: absolute; top: 0px; left: 0px; pointer-events: none;"
+                                        class="cGcvT"></grammarly-extension>
+                                    <div class="form-group">
+                                        <textarea name="message" id="message" class="form-control" rows="7" cols="25"
+                                            placeholder="Message" spellcheck="false"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 mt-3">
+                                    <button type="submit" class="btn solid-btn disabled" id="btnContactUs"
+                                        style="pointer-events: all; cursor: pointer;">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <p class="form-message"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+</body>
+</html>

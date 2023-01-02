@@ -1,0 +1,33 @@
+body {
+  font-family: "Poppins", sans-serif; // p
+  font-family: "Anton", sans-serif;
+  font-family: "Archivo Black", sans-serif;
+  font-family: "Righteous", cursive;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 1000px;
+}
+.hero-section-2,
+.hero-section-3 {
+  position: relative;
+  overflow: hidden;
+}
+.hero-section-2,
+.hero-section-3 {
+  position: relative;
+  overflow: hidden;
+}
+.ptb-100 {
+  padding: 100px 0;
+}
+p {
+  margin-bottom: 1.25em;
+  font-family: "Poppins", sans-serif;
+}
+.gray-light-bg {
+  background: #f4f7fa;
+}
+a {
+  text-decoration: none;
+}

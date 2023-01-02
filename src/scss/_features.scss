@@ -1,0 +1,98 @@
+.feature-section {
+  .download-img {
+    text-align: center;
+  }
+}
+.feature-content-wrap {
+  .feature-tab {
+    border: none;
+    li.nav-item {
+      margin-right: 20px;
+      a.nav-link {
+        border: 1px solid #e3e2e2;
+        -webkit-box-shadow: 0 2px 15px 0 #341b9f1a;
+        box-shadow: 0 2px 15px 0 #341b9f1a;
+        text-align: center;
+        padding: 15px;
+        border-radius: 6px;
+        min-width: 110px;
+        transition: all 0.3s ease-in;
+        font-size: 16px;
+        line-height: 16px;
+        color: #757575;
+        margin-bottom: 10px;
+        &.active {
+          background-color: #810c25;
+          color: #fff;
+          span {
+            color: #fff;
+          }
+        }
+        span {
+          display: block;
+          font-size: 30px;
+          margin-bottom: 10px;
+          color: #9629e6;
+          img {
+            height: 28px;
+          }
+        }
+      }
+    }
+  }
+  .feature-tab-content {
+    margin-top: 25px;
+    min-height: 260px;
+    .tab-pane {
+      .single-feature .icon {
+        font-size: 22px;
+        line-height: 22px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        width: 50px;
+        height: 50px;
+        &.icon-color-1 {
+          background: #efdff7;
+          color: #b17cc6;
+        }
+        &.icon-color-2 {
+          background-color: #c6e6fd;
+          color: #63b0e3;
+        }
+        &.icon-color-3 {
+          background-color: #efe3e3;
+          color: #ed7265;
+        }
+      }
+    }
+  }
+  .badge {
+    display: inline-block;
+    background-color: #efe3e3;
+    padding: 0.4rem 0.5rem;
+    font-size: 80%;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 5px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    width: 35px;
+    margin-right: 10px;
+    img {
+      width: 15px;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .feature-section {
+    .feature-contents {
+      margin-top: 40px;
+    }
+  }
+}

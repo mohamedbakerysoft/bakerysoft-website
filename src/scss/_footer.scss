@@ -1,0 +1,34 @@
+.footer-section {
+  background-image: linear-gradient(90deg, #860e27, #a93c7c) !important;
+  padding-bottom: 2px;
+  .border-gray-light {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .support-list {
+    li {
+      span {
+        font-size: 16px;
+        line-height: 28px;
+      }
+    }
+  }
+  .social-list-wrap ul li span {
+    font-size: 15px;
+    line-height: inherit;
+    vertical-align: middle;
+    padding: 6px;
+  }
+  a,
+  li {
+    color: #fff;
+    font-family: Poppins, sans-serif;
+  }
+  .terms-policy-wrap {
+    .list-inline {
+      text-align: right;
+      @media (max-width: 767px) {
+        text-align: left;
+      }
+    }
+  }
+}

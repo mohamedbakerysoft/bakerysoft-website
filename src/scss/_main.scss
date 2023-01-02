@@ -1,0 +1,115 @@
+.main {
+  .hero-section-2 {
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 100%;
+      height: 175%;
+      bottom: 0;
+      background-image: url(../images/hero-bg-shape-3.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    h1 {
+      font-size: 2.6rem;
+      letter-spacing: 2px;
+    }
+    .app-store-btn {
+      border-radius: 30px;
+      color: #ffffff;
+      border-color: #ffffff;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 700;
+      transition: all 0.4s ease-in-out;
+      &:hover {
+        background-color: #fff;
+        color: #810c25;
+      }
+    }
+    .hero-animation-img {
+      position: relative;
+      display: block;
+      width: 100%;
+      @media (min-width: 992px) {
+        .animation-one {
+          position: relative;
+          -webkit-animation: move-one 5s ease-in-out infinite;
+          animation: move-one 5s ease-in-out infinite;
+        }
+        .animation-two {
+          position: absolute;
+          bottom: -10px;
+          -webkit-animation: move-two 5s ease-in-out infinite;
+          animation: move-two 5s ease-in-out infinite;
+        }
+        .animation-three {
+          position: absolute;
+          left: -45px;
+          -webkit-animation: move-three 5.5s ease-in-out infinite;
+          animation: move-three 5.5s ease-in-out infinite;
+        }
+        .animation-four {
+          position: absolute;
+          right: -75px;
+          -webkit-animation: move-four 4s ease-in-out infinite;
+          animation: move-four 4s ease-in-out infinite;
+        }
+      }
+    }
+  }
+  .circles + .container {
+    position: relative;
+  }
+}
+
+// Animations keyframes
+@keyframes move-one {
+  0% {
+    top: 0px;
+  }
+  50% {
+    top: 10px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+
+@keyframes move-two {
+  0% {
+    bottom: 215px;
+  }
+  50% {
+    bottom: 225px;
+  }
+  100% {
+    bottom: 215px;
+  }
+}
+
+@keyframes move-three {
+  0% {
+    bottom: 25px;
+  }
+  50% {
+    bottom: 35px;
+  }
+  100% {
+    bottom: 25px;
+  }
+}
+@keyframes move-four {
+  0% {
+    bottom: -40px;
+  }
+  50% {
+    bottom: -60px;
+  }
+  100% {
+    bottom: -40px;
+  }
+}

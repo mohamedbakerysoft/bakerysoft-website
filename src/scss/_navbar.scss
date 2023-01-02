@@ -1,0 +1,33 @@
+.navbar {
+  padding-top: 1rem;
+  transition: all 0.4s ease-in-out;
+  &.sticky {
+    background-image: linear-gradient(to right, #860e27, #c05ab2) !important;
+  }
+  &-brand {
+    letter-spacing: 2px;
+    h1 {
+      color: #fff;
+      font-size: 2rem;
+    }
+  }
+  .nav-item {
+    margin-right: 40px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+    .nav-link {
+      color: #fff;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+      &.active {
+        color: #e26161;
+      }
+    }
+  }
+}
+@media (max-width: 991px) {
+  .navbar {
+    background-image: linear-gradient(90deg, #8a1542, #912174) !important;
+  }
+}

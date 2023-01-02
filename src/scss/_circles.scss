@@ -1,0 +1,236 @@
+.circles {
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  .point {
+    border-radius: 50%;
+    z-index: 999;
+    position: absolute;
+    &.animated-point-1 {
+      background-color: red;
+      height: 12px;
+      width: 12px;
+      //
+      -webkit-animation-name: p1;
+      -webkit-animation-duration: 80s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p1;
+      animation-duration: 80s;
+      animation-iteration-count: infinite;
+    }
+    &.animated-point-2 {
+      background-color: green;
+      height: 15px;
+      width: 15px;
+      -webkit-animation-name: p2;
+      -webkit-animation-duration: 90s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p2;
+      animation-duration: 90s;
+      animation-iteration-count: infinite;
+    }
+    &.animated-point-3 {
+      background-color: orange;
+      height: 8px;
+      width: 8px;
+
+      -webkit-animation-name: p3;
+      -webkit-animation-duration: 80s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p3;
+      animation-duration: 80s;
+      animation-iteration-count: infinite;
+    }
+    &.animated-point-4 {
+      background-color: pink;
+      height: 10px;
+      width: 10px;
+
+      -webkit-animation-name: p4;
+      -webkit-animation-duration: 80s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p4;
+      animation-duration: 80s;
+      animation-iteration-count: infinite;
+    }
+    &.animated-point-5 {
+      background-color: #cbcbd0;
+      height: 12px;
+      width: 12px;
+      -webkit-animation-name: p5;
+      -webkit-animation-duration: 50s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p5;
+      animation-duration: 50s;
+      animation-iteration-count: infinite;
+    }
+    &.animated-point-6 {
+      background-color: #ffc64c;
+      height: 10px;
+      width: 10px;
+
+      -webkit-animation-name: p6;
+      -webkit-animation-duration: 70s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p6;
+      animation-duration: 70s;
+      animation-iteration-count: infinite;
+    }
+    &.animated-point-7 {
+      background-color: orange;
+      height: 14px;
+      width: 14px;
+
+      -webkit-animation-name: p7;
+      -webkit-animation-duration: 70s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p7;
+      animation-duration: 70s;
+      animation-iteration-count: infinite;
+    }
+    &.animated-point-8 {
+      background-color: #8c50ff;
+      height: 8px;
+      width: 8px;
+      -webkit-animation-name: p8;
+      -webkit-animation-duration: 50s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p8;
+      animation-duration: 50s;
+      animation-iteration-count: infinite;
+    }
+    &.animated-point-9 {
+      background-color: #e26161;
+      height: 12px;
+      width: 12px;
+      -webkit-animation-name: p9;
+      -webkit-animation-duration: 100s;
+      -webkit-animation-iteration-count: infinite;
+      animation-name: p9;
+      animation-duration: 100s;
+      animation-iteration-count: infinite;
+    }
+  }
+}
+// Animations keyframes
+@keyframes p1 {
+  0% {
+    bottom: 95%;
+    left: 50%;
+  }
+  50% {
+    bottom: 0;
+    left: 0;
+  }
+  100% {
+    bottom: 95%;
+    left: 50%;
+  }
+}
+@keyframes p2 {
+  0% {
+    bottom: 95%;
+  }
+  50% {
+    bottom: 0;
+  }
+  100% {
+    bottom: 95%;
+  }
+}
+@keyframes p3 {
+  0% {
+    bottom: 0;
+    left: 0;
+  }
+  50% {
+    bottom: 95%;
+    left: 30%;
+  }
+  100% {
+    bottom: 0;
+    left: 0;
+  }
+}
+@keyframes p4 {
+  0% {
+    bottom: 20%;
+    left: 80%;
+  }
+  50% {
+    left: 0%;
+  }
+  100% {
+    bottom: 20%;
+    left: 80%;
+  }
+}
+@keyframes p5 {
+  0% {
+    bottom: 0;
+    left: 30%;
+  }
+  50% {
+    bottom: 95%;
+    left: 50%;
+  }
+  100% {
+    bottom: 0;
+    left: 30%;
+  }
+}
+@keyframes p6 {
+  0% {
+    top: 10%;
+    left: 30%;
+  }
+  50% {
+    top: 95%;
+    left: 60%;
+  }
+  100% {
+    top: 30%;
+    left: 30%;
+  }
+}
+@keyframes p7 {
+  0% {
+    top: 20%;
+    left: 0;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    top: 20%;
+    left: 0;
+  }
+}
+@keyframes p8 {
+  0% {
+    top: 45%;
+    left: 0;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    top: 45%;
+    left: 0;
+  }
+}
+@keyframes p9 {
+  0% {
+    bottom: 95%;
+    left: 90%;
+  }
+  50% {
+    bottom: 0;
+    left: 0;
+  }
+  100% {
+    bottom: 95%;
+    left: 90%;
+  }
+}
