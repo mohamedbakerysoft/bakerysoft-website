@@ -80,5 +80,10 @@ class PlatformPagesTest extends TestCase
             ->assertHeader('content-type', 'text/plain; charset=UTF-8')
             ->assertSee('User-agent: *')
             ->assertSee('Sitemap: ' . route('sitemap'));
+
+        $this->get(route('ads'))
+            ->assertOk()
+            ->assertHeader('content-type', 'text/plain; charset=UTF-8')
+            ->assertSee('google.com, pub-7475653835852794, DIRECT, f08c47fec0942fa0');
     }
 }

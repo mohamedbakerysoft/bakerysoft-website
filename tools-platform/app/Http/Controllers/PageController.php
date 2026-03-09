@@ -119,4 +119,11 @@ class PageController extends Controller
             'Content-Type' => 'text/plain; charset=UTF-8',
         ]);
     }
+
+    public function ads(): Response
+    {
+        return response('google.com, pub-7475653835852794, DIRECT, f08c47fec0942fa0', 200, [
+            'Content-Type' => 'text/plain; charset=UTF-8',
+        ]);
+    }
 }
