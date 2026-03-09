@@ -65,4 +65,20 @@ class PlatformPagesTest extends TestCase
             ->assertOk()
             ->assertSee('اتصل بنا');
     }
+
+    public function test_sitemap_and_robots_render(): void
+    {
+        $this->get(route('sitemap'))
+            ->assertOk()
+            ->assertHeader('content-type', 'application/xml; charset=UTF-8')
+            ->assertSee('<?xml version="1.0" encoding="UTF-8"?>', false)
+            ->assertSee(route('home'), false)
+            ->assertSee(route('about'), false);
+
+        $this->get(route('robots'))
+            ->assertOk()
+            ->assertHeader('content-type', 'text/plain; charset=UTF-8')
+            ->assertSee('User-agent: *')
+            ->assertSee('Sitemap: ' . route('sitemap'));
+    }
 }
