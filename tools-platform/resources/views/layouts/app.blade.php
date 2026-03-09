@@ -37,10 +37,10 @@
                     <span class="text-lg font-extrabold text-slate-900 dark:text-white sm:hidden">أدوات BakerySoft</span>
                 </a>
                 <nav class="hidden items-center gap-5 text-sm font-semibold text-slate-600 dark:text-slate-300 md:flex">
-                    <a href="{{ route('category.show', ['categorySlug' => 'ادوات-الاستثمار']) }}">الاستثمار</a>
-                    <a href="{{ route('category.show', ['categorySlug' => 'ادوات-المال']) }}">المال</a>
+                    <a href="{{ route('category.show', ['categorySlug' => 'ادوات-الاستثمار']) }}">أدوات الاستثمار</a>
+                    <a href="{{ route('category.show', ['categorySlug' => 'ادوات-المال']) }}">أدوات المال</a>
                     <a href="{{ route('category.show', ['categorySlug' => 'المحولات']) }}">المحولات</a>
-                    <a href="{{ route('category.show', ['categorySlug' => 'الحاسبات-اليومية']) }}">اليومي</a>
+                    <a href="{{ route('category.show', ['categorySlug' => 'الحاسبات-اليومية']) }}">الحاسبات اليومية</a>
                 </nav>
                 <button type="button" class="btn-secondary !px-4 !py-2" @click="toggle">
                     <span x-show="!dark">الوضع الداكن</span>
@@ -57,7 +57,7 @@
             <div class="card-panel grid gap-8 px-6 py-8 md:grid-cols-3">
                 <div>
                     <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="BakerySoft Tools" class="h-10 w-auto max-w-full dark:brightness-110">
-                    <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">منصة عربية قابلة للتوسع لبناء حاسبات ومحولات وصفحات SEO عالية الجودة تخدم البحث العضوي والإعلانات.</p>
+                    <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">منصة عربية عملية تساعد المستخدم على الحساب والتحويل بسرعة، مع واجهات واضحة ونتائج قابلة للفهم من أول نظرة.</p>
                 </div>
                 <div>
                     <h4 class="font-bold text-slate-900 dark:text-white">الأقسام</h4>

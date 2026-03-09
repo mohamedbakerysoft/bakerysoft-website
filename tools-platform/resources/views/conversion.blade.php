@@ -4,14 +4,14 @@
     <section class="shell pt-10">
         <div class="grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
             <div class="card-panel px-6 py-8 md:px-8">
-                <span class="chip">صفحة SEO برمجية</span>
+                <span class="chip">محول سريع ودقيق</span>
                 <h1 class="mt-4 text-4xl font-extrabold text-slate-950 dark:text-white">تحويل {{ $conversion->from_unit_ar }} إلى {{ $conversion->to_unit_ar }}</h1>
-                <p class="mt-5 text-lg leading-9 text-slate-600 dark:text-slate-300">استخدم محول {{ $conversion->from_unit_ar }} إلى {{ $conversion->to_unit_ar }} للحصول على تحويل مباشر وسريع مع شرح مبسط وروابط إضافية لنفس الوحدة المصدر.</p>
+                <p class="mt-5 text-lg leading-9 text-slate-600 dark:text-slate-300">أدخل القيمة التي تريد تحويلها من {{ $conversion->from_unit_ar }} إلى {{ $conversion->to_unit_ar }} وستظهر لك النتيجة فورًا مع معدل التحويل وروابط مفيدة لوحدات قريبة.</p>
 
                 <form method="get" class="mt-8 grid gap-4 md:grid-cols-[1fr_auto]">
                     <label class="block">
                         <span class="mb-2 block text-sm font-bold text-slate-700 dark:text-slate-200">القيمة</span>
-                        <input class="field" type="number" step="any" name="amount" value="{{ request('amount', $amount) }}">
+                        <input class="field" type="number" step="any" name="amount" value="{{ request('amount', $amount) }}" placeholder="مثال: 100">
                     </label>
                     <button class="btn-primary self-end" type="submit">حوّل الآن</button>
                 </form>
@@ -41,7 +41,7 @@
                 <h2 class="text-2xl font-bold text-slate-900 dark:text-white">طريقة الاستخدام</h2>
                 <div class="mt-5 space-y-4 text-sm leading-8 text-slate-600 dark:text-slate-300">
                     <p>أدخل القيمة التي تريد تحويلها من {{ $conversion->from_unit_ar }} إلى {{ $conversion->to_unit_ar }}، ثم اضغط على زر التحويل.</p>
-                    <p>هذه الصفحة جزء من بنية SEO برمجية تمكّن الموقع من تغطية آلاف تراكيب التحويل المختلفة مع محتوى مفيد وليس مجرد صفحة فارغة.</p>
+                    <p>ستحصل على الناتج مباشرة مع معدل التحويل الحالي المستخدم داخل هذه الصفحة حتى تتمكن من المراجعة أو المقارنة بسرعة.</p>
                     <p>يمكنك أيضًا الانتقال إلى تحويلات أخرى من نفس الوحدة المصدر عبر الروابط ذات الصلة أدناه.</p>
                 </div>
             </div>

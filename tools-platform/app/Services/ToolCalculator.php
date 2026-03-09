@@ -8,6 +8,15 @@ use Carbon\Carbon;
 
 class ToolCalculator
 {
+    private const CURRENCIES = [
+        'EGP' => ['label' => 'جنيه مصري', 'symbol' => 'ج.م'],
+        'SAR' => ['label' => 'ريال سعودي', 'symbol' => 'ر.س'],
+        'AED' => ['label' => 'درهم إماراتي', 'symbol' => 'د.إ'],
+        'USD' => ['label' => 'دولار أمريكي', 'symbol' => '$'],
+        'EUR' => ['label' => 'يورو', 'symbol' => '€'],
+        'KWD' => ['label' => 'دينار كويتي', 'symbol' => 'د.ك'],
+    ];
+
     public function calculate(Tool $tool, array $input): array
     {
         return match ($tool->tool_type) {
@@ -49,6 +58,7 @@ class ToolCalculator
 
     private function compoundInterest(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $principal = (float) ($input['principal'] ?? 0);
         $rate = ((float) ($input['rate'] ?? 0)) / 100;
         $years = (float) ($input['years'] ?? 0);
@@ -76,17 +86,18 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'القيمة المستقبلية', 'value' => $this->money($balance)],
-                ['label' => 'إجمالي المساهمات', 'value' => $this->money($contributed)],
-                ['label' => 'الأرباح المتوقعة', 'value' => $this->money($profit)],
+                ['label' => 'القيمة المستقبلية', 'value' => $this->money($balance, $currency)],
+                ['label' => 'إجمالي المساهمات', 'value' => $this->money($contributed, $currency)],
+                ['label' => 'الأرباح المتوقعة', 'value' => $this->money($profit, $currency)],
             ],
-            'summary' => 'إذا استثمرت ' . $this->money($principal) . ' بمعدل ' . (($rate * 100)) . '% لمدة ' . $years . ' سنة فالقيمة المتوقعة هي ' . $this->money($balance),
+            'summary' => 'إذا استثمرت ' . $this->money($principal, $currency) . ' بمعدل ' . (($rate * 100)) . '% لمدة ' . $years . ' سنة فالقيمة المتوقعة هي ' . $this->money($balance, $currency) . '.',
             'chart' => $points,
         ];
     }
 
     private function loan(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $amount = (float) ($input['amount'] ?? 0);
         $annualRate = ((float) ($input['rate'] ?? 0)) / 100;
         $years = (float) ($input['years'] ?? 0);
@@ -102,16 +113,17 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'القسط الشهري', 'value' => $this->money($payment)],
-                ['label' => 'إجمالي السداد', 'value' => $this->money($total)],
-                ['label' => 'إجمالي الفوائد', 'value' => $this->money($interest)],
+                ['label' => 'القسط الشهري', 'value' => $this->money($payment, $currency)],
+                ['label' => 'إجمالي السداد', 'value' => $this->money($total, $currency)],
+                ['label' => 'إجمالي الفوائد', 'value' => $this->money($interest, $currency)],
             ],
-            'summary' => 'قسط قرض بقيمة ' . $this->money($amount) . ' لمدة ' . $years . ' سنة يساوي تقريبًا ' . $this->money($payment) . ' شهريًا.',
+            'summary' => 'قسط قرض بقيمة ' . $this->money($amount, $currency) . ' لمدة ' . $years . ' سنة يساوي تقريبًا ' . $this->money($payment, $currency) . ' شهريًا.',
         ];
     }
 
     private function investmentReturn(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $initial = (float) ($input['initial_amount'] ?? 0);
         $final = (float) ($input['final_amount'] ?? 0);
         $months = max((float) ($input['period_months'] ?? 1), 1);
@@ -121,16 +133,17 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'الربح الصافي', 'value' => $this->money($profit)],
+                ['label' => 'الربح الصافي', 'value' => $this->money($profit, $currency)],
                 ['label' => 'نسبة العائد', 'value' => $this->percent($roi)],
                 ['label' => 'العائد السنوي التقريبي', 'value' => $this->percent($annualized)],
             ],
-            'summary' => 'ارتفع الاستثمار من ' . $this->money($initial) . ' إلى ' . $this->money($final) . ' بعائد إجمالي ' . $this->percent($roi) . '.',
+            'summary' => 'ارتفع الاستثمار من ' . $this->money($initial, $currency) . ' إلى ' . $this->money($final, $currency) . ' بعائد إجمالي ' . $this->percent($roi) . '.',
         ];
     }
 
     private function tradeProfit(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $quantity = (float) ($input['quantity'] ?? 0);
         $buy = (float) ($input['buy_price'] ?? 0);
         $sell = (float) ($input['sell_price'] ?? 0);
@@ -142,17 +155,18 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'تكلفة الشراء', 'value' => $this->money($cost)],
-                ['label' => 'قيمة البيع', 'value' => $this->money($revenue)],
-                ['label' => 'صافي الربح', 'value' => $this->money($profit)],
+                ['label' => 'تكلفة الشراء', 'value' => $this->money($cost, $currency)],
+                ['label' => 'قيمة البيع', 'value' => $this->money($revenue, $currency)],
+                ['label' => 'صافي الربح', 'value' => $this->money($profit, $currency)],
                 ['label' => 'نسبة الربح', 'value' => $this->percent($margin)],
             ],
-            'summary' => 'صافي الربح من الصفقة يساوي ' . $this->money($profit) . ' بنسبة ' . $this->percent($margin) . '.',
+            'summary' => 'صافي الربح من الصفقة يساوي ' . $this->money($profit, $currency) . ' بنسبة ' . $this->percent($margin) . '.',
         ];
     }
 
     private function profitMargin(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $revenue = (float) ($input['revenue'] ?? 0);
         $cost = (float) ($input['cost'] ?? 0);
         $profit = $revenue - $cost;
@@ -160,15 +174,16 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'الربح', 'value' => $this->money($profit)],
+                ['label' => 'الربح', 'value' => $this->money($profit, $currency)],
                 ['label' => 'هامش الربح', 'value' => $this->percent($margin)],
             ],
-            'summary' => 'عند إيرادات ' . $this->money($revenue) . ' وتكلفة ' . $this->money($cost) . ' يصبح هامش الربح ' . $this->percent($margin) . '.',
+            'summary' => 'عند إيرادات ' . $this->money($revenue, $currency) . ' وتكلفة ' . $this->money($cost, $currency) . ' يصبح هامش الربح ' . $this->percent($margin) . '.',
         ];
     }
 
     private function vat(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $amount = (float) ($input['amount'] ?? 0);
         $rate = (float) ($input['rate'] ?? 0);
         $vat = $amount * ($rate / 100);
@@ -176,15 +191,16 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'قيمة الضريبة', 'value' => $this->money($vat)],
-                ['label' => 'الإجمالي بعد الضريبة', 'value' => $this->money($total)],
+                ['label' => 'قيمة الضريبة', 'value' => $this->money($vat, $currency)],
+                ['label' => 'الإجمالي بعد الضريبة', 'value' => $this->money($total, $currency)],
             ],
-            'summary' => 'ضريبة القيمة المضافة على ' . $this->money($amount) . ' بنسبة ' . $rate . '% تساوي ' . $this->money($vat) . '.',
+            'summary' => 'ضريبة القيمة المضافة على ' . $this->money($amount, $currency) . ' بنسبة ' . $rate . '% تساوي ' . $this->money($vat, $currency) . '.',
         ];
     }
 
     private function discount(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $price = (float) ($input['original_price'] ?? 0);
         $rate = (float) ($input['discount_rate'] ?? 0);
         $discount = $price * ($rate / 100);
@@ -192,10 +208,10 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'قيمة الخصم', 'value' => $this->money($discount)],
-                ['label' => 'السعر بعد الخصم', 'value' => $this->money($final)],
+                ['label' => 'قيمة الخصم', 'value' => $this->money($discount, $currency)],
+                ['label' => 'السعر بعد الخصم', 'value' => $this->money($final, $currency)],
             ],
-            'summary' => 'بعد خصم ' . $rate . '% يصبح السعر النهائي ' . $this->money($final) . '.',
+            'summary' => 'بعد خصم ' . $rate . '% يصبح السعر النهائي ' . $this->money($final, $currency) . '.',
         ];
     }
 
@@ -216,20 +232,22 @@ class ToolCalculator
 
     private function goldValue(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $grams = (float) ($input['grams'] ?? 0);
         $price = (float) ($input['price_per_gram'] ?? 0);
         $value = $grams * $price;
 
         return [
             'rows' => [
-                ['label' => 'قيمة الذهب', 'value' => $this->money($value)],
+                ['label' => 'قيمة الذهب', 'value' => $this->money($value, $currency)],
             ],
-            'summary' => 'قيمة ' . $grams . ' جرام ذهب بسعر ' . $this->money($price) . ' للجرام هي ' . $this->money($value) . '.',
+            'summary' => 'قيمة ' . $grams . ' جرام ذهب بسعر ' . $this->money($price, $currency) . ' للجرام هي ' . $this->money($value, $currency) . '.',
         ];
     }
 
     private function inflation(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $amount = (float) ($input['amount'] ?? 0);
         $rate = ((float) ($input['rate'] ?? 0)) / 100;
         $years = (float) ($input['years'] ?? 0);
@@ -237,15 +255,16 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'القيمة بعد التضخم', 'value' => $this->money($futureCost)],
-                ['label' => 'الزيادة المتوقعة', 'value' => $this->money($futureCost - $amount)],
+                ['label' => 'القيمة بعد التضخم', 'value' => $this->money($futureCost, $currency)],
+                ['label' => 'الزيادة المتوقعة', 'value' => $this->money($futureCost - $amount, $currency)],
             ],
-            'summary' => 'مبلغ ' . $this->money($amount) . ' مع تضخم سنوي ' . (($rate * 100)) . '% يصبح ' . $this->money($futureCost) . ' بعد ' . $years . ' سنة.',
+            'summary' => 'مبلغ ' . $this->money($amount, $currency) . ' مع تضخم سنوي ' . (($rate * 100)) . '% يصبح ' . $this->money($futureCost, $currency) . ' بعد ' . $years . ' سنة.',
         ];
     }
 
     private function salary(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $monthlySalary = (float) ($input['monthly_salary'] ?? 0);
         $deductions = ((float) ($input['deductions_rate'] ?? 0)) / 100;
         $allowances = (float) ($input['allowances'] ?? 0);
@@ -253,10 +272,10 @@ class ToolCalculator
 
         return [
             'rows' => [
-                ['label' => 'صافي الراتب الشهري', 'value' => $this->money($netMonthly)],
-                ['label' => 'صافي الراتب السنوي', 'value' => $this->money($netMonthly * 12)],
+                ['label' => 'صافي الراتب الشهري', 'value' => $this->money($netMonthly, $currency)],
+                ['label' => 'صافي الراتب السنوي', 'value' => $this->money($netMonthly * 12, $currency)],
             ],
-            'summary' => 'صافي الراتب الشهري المتوقع هو ' . $this->money($netMonthly) . '.',
+            'summary' => 'صافي الراتب الشهري المتوقع هو ' . $this->money($netMonthly, $currency) . '.',
         ];
     }
 
@@ -368,6 +387,7 @@ class ToolCalculator
 
     private function breakEven(array $input): array
     {
+        $currency = $this->resolveCurrency($input);
         $fixed = (float) ($input['fixed_costs'] ?? 0);
         $price = (float) ($input['unit_price'] ?? 0);
         $variable = (float) ($input['variable_cost'] ?? 0);
@@ -377,7 +397,7 @@ class ToolCalculator
         return [
             'rows' => [
                 ['label' => 'نقطة التعادل بالوحدات', 'value' => (string) $units],
-                ['label' => 'نقطة التعادل بالمبيعات', 'value' => $this->money($units * $price)],
+                ['label' => 'نقطة التعادل بالمبيعات', 'value' => $this->money($units * $price, $currency)],
             ],
             'summary' => 'تصل إلى نقطة التعادل بعد بيع ' . $units . ' وحدة تقريبًا.',
         ];
@@ -400,9 +420,32 @@ class ToolCalculator
         ];
     }
 
-    private function money(float $value): string
+    public static function currencyOptions(): array
     {
-        return $this->format($value) . ' ر.س';
+        $options = [];
+
+        foreach (self::CURRENCIES as $code => $currency) {
+            $options[] = [
+                'value' => $code,
+                'label' => $currency['label'] . ' (' . $currency['symbol'] . ')',
+            ];
+        }
+
+        return $options;
+    }
+
+    private function resolveCurrency(array $input): array
+    {
+        $code = strtoupper((string) ($input['currency'] ?? 'EGP'));
+
+        return self::CURRENCIES[$code] ?? self::CURRENCIES['EGP'];
+    }
+
+    private function money(float $value, ?array $currency = null): string
+    {
+        $currency ??= self::CURRENCIES['EGP'];
+
+        return $this->format($value) . ' ' . $currency['symbol'];
     }
 
     private function percent(float $value): string

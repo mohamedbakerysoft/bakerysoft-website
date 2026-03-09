@@ -23,7 +23,7 @@ class PlatformPagesTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('أدوات BakerySoft');
-        $response->assertSee('حواسب ومحولات عربية');
+        $response->assertSee('أدوات عربية واضحة وسريعة');
     }
 
     public function test_tool_page_renders_with_arabic_route(): void
@@ -35,6 +35,7 @@ class PlatformPagesTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('حاسبة الفائدة المركبة');
+        $response->assertSee('جنيه مصري');
     }
 
     public function test_conversion_page_renders(): void

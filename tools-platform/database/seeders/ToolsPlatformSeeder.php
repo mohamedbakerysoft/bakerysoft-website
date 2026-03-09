@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Conversion;
 use App\Models\Tool;
+use App\Services\ToolCalculator;
 use App\Support\ArabicSlug;
 use Illuminate\Database\Seeder;
 
@@ -323,55 +324,61 @@ class ToolsPlatformSeeder extends Seeder
     private function compoundSchema(): array
     {
         return [
-            ['name' => 'principal', 'label' => 'رأس المال', 'type' => 'number', 'step' => 'any', 'default' => 10000],
-            ['name' => 'rate', 'label' => 'العائد السنوي %', 'type' => 'number', 'step' => 'any', 'default' => 8],
-            ['name' => 'years', 'label' => 'عدد السنوات', 'type' => 'number', 'step' => 'any', 'default' => 10],
-            ['name' => 'monthly_contribution', 'label' => 'إضافة شهرية', 'type' => 'number', 'step' => 'any', 'default' => 500],
-            ['name' => 'compounds_per_year', 'label' => 'مرات التركيب سنويًا', 'type' => 'number', 'step' => 1, 'default' => 12],
+            $this->currencyField(),
+            ['name' => 'principal', 'label' => 'رأس المال', 'type' => 'number', 'step' => 'any', 'default' => 10000, 'placeholder' => 'مثال: 10000', 'hint' => 'ابدأ بالمبلغ الذي ستستثمره الآن.'],
+            ['name' => 'rate', 'label' => 'العائد السنوي %', 'type' => 'number', 'step' => 'any', 'default' => 8, 'placeholder' => 'مثال: 8'],
+            ['name' => 'years', 'label' => 'عدد السنوات', 'type' => 'number', 'step' => 'any', 'default' => 10, 'placeholder' => 'مثال: 10'],
+            ['name' => 'monthly_contribution', 'label' => 'إضافة شهرية', 'type' => 'number', 'step' => 'any', 'default' => 500, 'placeholder' => 'مثال: 500'],
+            ['name' => 'compounds_per_year', 'label' => 'مرات التركيب سنويًا', 'type' => 'number', 'step' => 1, 'default' => 12, 'placeholder' => 'مثال: 12'],
         ];
     }
 
     private function investmentSchema(): array
     {
         return [
-            ['name' => 'initial_amount', 'label' => 'القيمة الابتدائية', 'type' => 'number', 'step' => 'any', 'default' => 10000],
-            ['name' => 'final_amount', 'label' => 'القيمة النهائية', 'type' => 'number', 'step' => 'any', 'default' => 13800],
-            ['name' => 'period_months', 'label' => 'عدد الشهور', 'type' => 'number', 'step' => 'any', 'default' => 18],
+            $this->currencyField(),
+            ['name' => 'initial_amount', 'label' => 'القيمة الابتدائية', 'type' => 'number', 'step' => 'any', 'default' => 10000, 'placeholder' => 'مثال: 10000'],
+            ['name' => 'final_amount', 'label' => 'القيمة النهائية', 'type' => 'number', 'step' => 'any', 'default' => 13800, 'placeholder' => 'مثال: 13800'],
+            ['name' => 'period_months', 'label' => 'عدد الشهور', 'type' => 'number', 'step' => 'any', 'default' => 18, 'placeholder' => 'مثال: 18'],
         ];
     }
 
     private function tradeSchema(): array
     {
         return [
-            ['name' => 'quantity', 'label' => 'الكمية', 'type' => 'number', 'step' => 'any', 'default' => 100],
-            ['name' => 'buy_price', 'label' => 'سعر الشراء', 'type' => 'number', 'step' => 'any', 'default' => 10],
-            ['name' => 'sell_price', 'label' => 'سعر البيع', 'type' => 'number', 'step' => 'any', 'default' => 13],
-            ['name' => 'fees', 'label' => 'الرسوم', 'type' => 'number', 'step' => 'any', 'default' => 25],
+            $this->currencyField(),
+            ['name' => 'quantity', 'label' => 'الكمية', 'type' => 'number', 'step' => 'any', 'default' => 100, 'placeholder' => 'مثال: 100'],
+            ['name' => 'buy_price', 'label' => 'سعر الشراء', 'type' => 'number', 'step' => 'any', 'default' => 10, 'placeholder' => 'مثال: 10'],
+            ['name' => 'sell_price', 'label' => 'سعر البيع', 'type' => 'number', 'step' => 'any', 'default' => 13, 'placeholder' => 'مثال: 13'],
+            ['name' => 'fees', 'label' => 'الرسوم', 'type' => 'number', 'step' => 'any', 'default' => 25, 'placeholder' => 'مثال: 25'],
         ];
     }
 
     private function loanSchema(): array
     {
         return [
-            ['name' => 'amount', 'label' => 'قيمة القرض', 'type' => 'number', 'step' => 'any', 'default' => 150000],
-            ['name' => 'rate', 'label' => 'الفائدة السنوية %', 'type' => 'number', 'step' => 'any', 'default' => 6.5],
-            ['name' => 'years', 'label' => 'مدة القرض بالسنوات', 'type' => 'number', 'step' => 'any', 'default' => 5],
+            $this->currencyField(),
+            ['name' => 'amount', 'label' => 'قيمة القرض', 'type' => 'number', 'step' => 'any', 'default' => 150000, 'placeholder' => 'مثال: 150000'],
+            ['name' => 'rate', 'label' => 'الفائدة السنوية %', 'type' => 'number', 'step' => 'any', 'default' => 6.5, 'placeholder' => 'مثال: 6.5'],
+            ['name' => 'years', 'label' => 'مدة القرض بالسنوات', 'type' => 'number', 'step' => 'any', 'default' => 5, 'placeholder' => 'مثال: 5'],
         ];
     }
 
     private function vatSchema(): array
     {
         return [
-            ['name' => 'amount', 'label' => 'المبلغ قبل الضريبة', 'type' => 'number', 'step' => 'any', 'default' => 1000],
-            ['name' => 'rate', 'label' => 'نسبة الضريبة %', 'type' => 'number', 'step' => 'any', 'default' => 15],
+            $this->currencyField(),
+            ['name' => 'amount', 'label' => 'المبلغ قبل الضريبة', 'type' => 'number', 'step' => 'any', 'default' => 1000, 'placeholder' => 'مثال: 1000'],
+            ['name' => 'rate', 'label' => 'نسبة الضريبة %', 'type' => 'number', 'step' => 'any', 'default' => 15, 'placeholder' => 'مثال: 15'],
         ];
     }
 
     private function discountSchema(): array
     {
         return [
-            ['name' => 'original_price', 'label' => 'السعر الأصلي', 'type' => 'number', 'step' => 'any', 'default' => 450],
-            ['name' => 'discount_rate', 'label' => 'نسبة الخصم %', 'type' => 'number', 'step' => 'any', 'default' => 20],
+            $this->currencyField(),
+            ['name' => 'original_price', 'label' => 'السعر الأصلي', 'type' => 'number', 'step' => 'any', 'default' => 450, 'placeholder' => 'مثال: 450'],
+            ['name' => 'discount_rate', 'label' => 'نسبة الخصم %', 'type' => 'number', 'step' => 'any', 'default' => 20, 'placeholder' => 'مثال: 20'],
         ];
     }
 
@@ -386,34 +393,38 @@ class ToolsPlatformSeeder extends Seeder
     private function marginSchema(): array
     {
         return [
-            ['name' => 'revenue', 'label' => 'الإيرادات', 'type' => 'number', 'step' => 'any', 'default' => 120000],
-            ['name' => 'cost', 'label' => 'التكلفة', 'type' => 'number', 'step' => 'any', 'default' => 86000],
+            $this->currencyField(),
+            ['name' => 'revenue', 'label' => 'الإيرادات', 'type' => 'number', 'step' => 'any', 'default' => 120000, 'placeholder' => 'مثال: 120000'],
+            ['name' => 'cost', 'label' => 'التكلفة', 'type' => 'number', 'step' => 'any', 'default' => 86000, 'placeholder' => 'مثال: 86000'],
         ];
     }
 
     private function goldSchema(): array
     {
         return [
-            ['name' => 'grams', 'label' => 'الوزن بالجرام', 'type' => 'number', 'step' => 'any', 'default' => 25],
-            ['name' => 'price_per_gram', 'label' => 'سعر الجرام', 'type' => 'number', 'step' => 'any', 'default' => 285],
+            $this->currencyField(),
+            ['name' => 'grams', 'label' => 'الوزن بالجرام', 'type' => 'number', 'step' => 'any', 'default' => 25, 'placeholder' => 'مثال: 25'],
+            ['name' => 'price_per_gram', 'label' => 'سعر الجرام', 'type' => 'number', 'step' => 'any', 'default' => 285, 'placeholder' => 'مثال: 285'],
         ];
     }
 
     private function inflationSchema(): array
     {
         return [
-            ['name' => 'amount', 'label' => 'القيمة الحالية', 'type' => 'number', 'step' => 'any', 'default' => 1000],
-            ['name' => 'rate', 'label' => 'معدل التضخم السنوي %', 'type' => 'number', 'step' => 'any', 'default' => 5],
-            ['name' => 'years', 'label' => 'عدد السنوات', 'type' => 'number', 'step' => 'any', 'default' => 4],
+            $this->currencyField(),
+            ['name' => 'amount', 'label' => 'القيمة الحالية', 'type' => 'number', 'step' => 'any', 'default' => 1000, 'placeholder' => 'مثال: 1000'],
+            ['name' => 'rate', 'label' => 'معدل التضخم السنوي %', 'type' => 'number', 'step' => 'any', 'default' => 5, 'placeholder' => 'مثال: 5'],
+            ['name' => 'years', 'label' => 'عدد السنوات', 'type' => 'number', 'step' => 'any', 'default' => 4, 'placeholder' => 'مثال: 4'],
         ];
     }
 
     private function salarySchema(): array
     {
         return [
-            ['name' => 'monthly_salary', 'label' => 'الراتب الأساسي', 'type' => 'number', 'step' => 'any', 'default' => 10000],
-            ['name' => 'allowances', 'label' => 'البدلات', 'type' => 'number', 'step' => 'any', 'default' => 1200],
-            ['name' => 'deductions_rate', 'label' => 'الاستقطاعات %', 'type' => 'number', 'step' => 'any', 'default' => 9],
+            $this->currencyField(),
+            ['name' => 'monthly_salary', 'label' => 'الراتب الأساسي', 'type' => 'number', 'step' => 'any', 'default' => 10000, 'placeholder' => 'مثال: 10000'],
+            ['name' => 'allowances', 'label' => 'البدلات', 'type' => 'number', 'step' => 'any', 'default' => 1200, 'placeholder' => 'مثال: 1200'],
+            ['name' => 'deductions_rate', 'label' => 'الاستقطاعات %', 'type' => 'number', 'step' => 'any', 'default' => 9, 'placeholder' => 'مثال: 9'],
         ];
     }
 
@@ -451,18 +462,32 @@ class ToolsPlatformSeeder extends Seeder
     private function savingsSchema(): array
     {
         return [
-            ['name' => 'target_amount', 'label' => 'الهدف الادخاري', 'type' => 'number', 'step' => 'any', 'default' => 100000],
-            ['name' => 'monthly_save', 'label' => 'الادخار الشهري', 'type' => 'number', 'step' => 'any', 'default' => 1500],
-            ['name' => 'annual_return', 'label' => 'العائد السنوي %', 'type' => 'number', 'step' => 'any', 'default' => 7],
+            $this->currencyField(),
+            ['name' => 'target_amount', 'label' => 'الهدف الادخاري', 'type' => 'number', 'step' => 'any', 'default' => 100000, 'placeholder' => 'مثال: 100000'],
+            ['name' => 'monthly_save', 'label' => 'الادخار الشهري', 'type' => 'number', 'step' => 'any', 'default' => 1500, 'placeholder' => 'مثال: 1500'],
+            ['name' => 'annual_return', 'label' => 'العائد السنوي %', 'type' => 'number', 'step' => 'any', 'default' => 7, 'placeholder' => 'مثال: 7'],
         ];
     }
 
     private function breakEvenSchema(): array
     {
         return [
-            ['name' => 'fixed_costs', 'label' => 'التكاليف الثابتة', 'type' => 'number', 'step' => 'any', 'default' => 30000],
-            ['name' => 'unit_price', 'label' => 'سعر الوحدة', 'type' => 'number', 'step' => 'any', 'default' => 120],
-            ['name' => 'variable_cost', 'label' => 'تكلفة الوحدة المتغيرة', 'type' => 'number', 'step' => 'any', 'default' => 55],
+            $this->currencyField(),
+            ['name' => 'fixed_costs', 'label' => 'التكاليف الثابتة', 'type' => 'number', 'step' => 'any', 'default' => 30000, 'placeholder' => 'مثال: 30000'],
+            ['name' => 'unit_price', 'label' => 'سعر الوحدة', 'type' => 'number', 'step' => 'any', 'default' => 120, 'placeholder' => 'مثال: 120'],
+            ['name' => 'variable_cost', 'label' => 'تكلفة الوحدة المتغيرة', 'type' => 'number', 'step' => 'any', 'default' => 55, 'placeholder' => 'مثال: 55'],
+        ];
+    }
+
+    private function currencyField(): array
+    {
+        return [
+            'name' => 'currency',
+            'label' => 'العملة',
+            'type' => 'select',
+            'default' => 'EGP',
+            'hint' => 'الافتراضي هو الجنيه المصري ويمكنك تغييره عند الحاجة.',
+            'options' => ToolCalculator::currencyOptions(),
         ];
     }
 }

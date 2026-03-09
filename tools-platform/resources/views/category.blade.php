@@ -6,6 +6,10 @@
             <span class="chip">{{ $category->name_ar }}</span>
             <h1 class="mt-4 text-4xl font-extrabold text-slate-950 dark:text-white">{{ $category->headline ?: $category->name_ar }}</h1>
             <p class="mt-5 max-w-4xl text-lg leading-9 text-slate-600 dark:text-slate-300">{{ $category->description }}</p>
+            <div class="mt-6 flex flex-wrap gap-3 text-sm font-semibold text-slate-500 dark:text-slate-400">
+                <span class="rounded-full bg-slate-100 px-4 py-2 dark:bg-slate-800">{{ $tools->total() }} أداة داخل هذا القسم</span>
+                <span class="rounded-full bg-slate-100 px-4 py-2 dark:bg-slate-800">روابط داخلية وأدوات مرتبطة لتسهيل الاستكشاف</span>
+            </div>
         </div>
     </section>
 
