@@ -5,7 +5,7 @@
         <div class="page-hero">
             <span class="chip">من نحن</span>
             <h1 class="mt-4 text-4xl font-extrabold text-slate-950 dark:text-white md:text-5xl">نبني أدوات عربية عملية تساعد المستخدم على الوصول إلى النتيجة بسرعة</h1>
-            <p class="mt-5 max-w-4xl text-lg leading-9 text-slate-600 dark:text-slate-300">أدوات BakerySoft منصة عربية متخصصة في الحاسبات والمحولات الرقمية، وهدفها تقديم تجربة سهلة وواضحة للمستخدم العربي في المال والاستثمار والتحويلات اليومية.</p>
+            <p class="mt-5 max-w-4xl text-lg leading-9 text-slate-600 dark:text-slate-300">أدوات Calclyo منصة عربية متخصصة في الحاسبات والمحولات الرقمية، وهدفها تقديم تجربة سهلة وواضحة للمستخدم العربي في المال والاستثمار والتحويلات اليومية.</p>
         </div>
     </section>
 

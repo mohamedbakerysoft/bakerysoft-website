@@ -22,7 +22,7 @@ class PlatformPagesTest extends TestCase
         $response = $this->get('/');
 
         $response->assertOk();
-        $response->assertSee('أدوات BakerySoft');
+        $response->assertSee('أدوات Calclyo');
         $response->assertSee('أدوات عربية واضحة وسريعة');
     }
 

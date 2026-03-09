@@ -4,7 +4,7 @@
     <section class="shell pt-10">
         <div class="page-hero">
             <span class="chip">سياسة الخصوصية</span>
-            <h1 class="mt-4 text-4xl font-extrabold text-slate-950 dark:text-white md:text-5xl">سياسة الخصوصية في أدوات BakerySoft</h1>
+            <h1 class="mt-4 text-4xl font-extrabold text-slate-950 dark:text-white md:text-5xl">سياسة الخصوصية في أدوات Calclyo</h1>
             <p class="mt-5 max-w-4xl text-lg leading-9 text-slate-600 dark:text-slate-300">توضح هذه الصفحة نوع البيانات التي قد تُجمع أثناء استخدام الموقع، وكيفية استخدامها، وكيف نتعامل مع ملفات تعريف الارتباط والخدمات الإعلانية والتحليلية.</p>
         </div>
     </section>

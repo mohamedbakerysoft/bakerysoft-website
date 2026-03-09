@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'BakerySoft Tools'),
+    'name' => env('APP_NAME', 'Calclyo'),
 
     /*
     |--------------------------------------------------------------------------

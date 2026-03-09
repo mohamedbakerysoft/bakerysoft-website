@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $metaTitle ?? 'أدوات BakerySoft العربية' }}</title>
+    <title>{{ $metaTitle ?? 'أدوات Calclyo العربية' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'منصة أدوات عربية للحاسبات والمحولات والمال والاستثمار.' }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('brand/favicon.svg') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
         $websiteSchema = [
             '@context' => 'https://schema.org',
             '@type' => 'WebSite',
-            'name' => 'أدوات BakerySoft',
+            'name' => 'أدوات Calclyo',
             'url' => url('/'),
             'potentialAction' => [
                 '@type' => 'SearchAction',
@@ -33,9 +33,9 @@
         <header class="shell sticky top-0 z-30 pt-4">
             <div class="card-panel flex items-center justify-between gap-4 px-5 py-4 backdrop-blur">
                 <a href="{{ route('home') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار BakerySoft Tools" class="h-11 w-11 shrink-0 rounded-2xl">
-                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="BakerySoft Tools" class="hidden h-10 w-auto dark:brightness-110 sm:block">
-                    <span class="text-lg font-extrabold text-slate-900 dark:text-white sm:hidden">أدوات BakerySoft</span>
+                    <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" class="h-11 w-11 shrink-0 rounded-2xl">
+                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="Calclyo" class="hidden h-10 w-auto dark:brightness-110 sm:block">
+                    <span class="text-lg font-extrabold text-slate-900 dark:text-white sm:hidden">أدوات Calclyo</span>
                 </a>
                 <nav class="hidden items-center gap-5 text-sm font-semibold text-slate-600 dark:text-slate-300 md:flex">
                     <a href="{{ route('category.show', ['categorySlug' => 'ادوات-الاستثمار']) }}">أدوات الاستثمار</a>
@@ -58,7 +58,7 @@
         <footer class="shell pb-10">
             <div class="card-panel grid gap-8 px-6 py-8 md:grid-cols-4">
                 <div>
-                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="BakerySoft Tools" class="h-10 w-auto max-w-full dark:brightness-110">
+                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="Calclyo" class="h-10 w-auto max-w-full dark:brightness-110">
                     <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">منصة عربية عملية تساعد المستخدم على الحساب والتحويل بسرعة، مع واجهات واضحة ونتائج قابلة للفهم من أول نظرة.</p>
                 </div>
                 <div>

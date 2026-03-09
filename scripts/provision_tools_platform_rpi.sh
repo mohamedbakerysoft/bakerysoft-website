@@ -3,9 +3,9 @@
 set -euo pipefail
 
 REMOTE_HOST="${REMOTE_HOST:-jarvis@jarvis.local}"
-APP_DIR="${APP_DIR:-/var/www/tools.bakerysoft.net/platform}"
-DB_NAME="${DB_NAME:-bakerysoft_tools}"
-DB_USER="${DB_USER:-bakerysoft_tools}"
+APP_DIR="${APP_DIR:-/var/www/calclyo.com/platform}"
+DB_NAME="${DB_NAME:-calclyo_tools}"
+DB_USER="${DB_USER:-calclyo_tools}"
 DB_PASSWORD="${DB_PASSWORD:-change_me_now}"
 
 ssh "$REMOTE_HOST" "sudo apt-get update"

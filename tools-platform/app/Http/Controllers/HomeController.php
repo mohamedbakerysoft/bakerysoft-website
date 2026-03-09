@@ -24,7 +24,7 @@ class HomeController extends Controller
             'featuredTools' => $featuredTools,
             'tools' => $recentTools,
             'query' => $query,
-            'metaTitle' => 'أدوات BakerySoft العربية للحاسبات والمحولات والاستثمار',
+            'metaTitle' => 'أدوات Calclyo العربية للحاسبات والمحولات والاستثمار',
             'metaDescription' => 'منصة عربية تضم مئات الحاسبات والمحولات وأدوات المال والاستثمار مع صفحات SEO داخلية قابلة للتوسع.',
         ]);
     }

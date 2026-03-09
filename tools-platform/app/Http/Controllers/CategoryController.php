@@ -16,8 +16,8 @@ class CategoryController extends Controller
             'category' => $category,
             'tools' => $tools,
             'relatedCategories' => $relatedCategories,
-            'metaTitle' => $category->name_ar . ' | أدوات BakerySoft',
-            'metaDescription' => $category->description ?: ('تصفح ' . $category->name_ar . ' في منصة BakerySoft العربية للأدوات والحاسبات.'),
+            'metaTitle' => $category->name_ar . ' | أدوات Calclyo',
+            'metaDescription' => $category->description ?: ('تصفح ' . $category->name_ar . ' في منصة Calclyo العربية للأدوات والحاسبات.'),
         ]);
     }
 }

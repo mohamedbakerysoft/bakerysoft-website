@@ -4,7 +4,7 @@ set -euo pipefail
 
 REMOTE_HOST="${REMOTE_HOST:-jarvis@jarvis.local}"
 REPO_URL="${REPO_URL:-https://github.com/mohamedbakerysoft/bakerysoft-website.git}"
-REPO_DIR="${REPO_DIR:-/var/www/tools.bakerysoft.net/source}"
+REPO_DIR="${REPO_DIR:-/var/www/calclyo.com/source}"
 
 ssh "$REMOTE_HOST" "sudo mkdir -p '$(dirname "$REPO_DIR")' && sudo chown -R \$(id -un):\$(id -gn) '$(dirname "$REPO_DIR")'"
 ssh "$REMOTE_HOST" "[ -d '$REPO_DIR/.git' ] || git clone '$REPO_URL' '$REPO_DIR'"

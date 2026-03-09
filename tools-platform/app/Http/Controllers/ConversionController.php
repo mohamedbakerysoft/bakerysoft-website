@@ -35,7 +35,7 @@ class ConversionController extends Controller
             'result' => $result,
             'relatedTools' => $relatedTools,
             'nearbyConversions' => $nearbyConversions,
-            'metaTitle' => 'تحويل ' . $conversion->from_unit_ar . ' إلى ' . $conversion->to_unit_ar . ' | BakerySoft',
+            'metaTitle' => 'تحويل ' . $conversion->from_unit_ar . ' إلى ' . $conversion->to_unit_ar . ' | Calclyo',
             'metaDescription' => 'حوّل بسهولة من ' . $conversion->from_unit_ar . ' إلى ' . $conversion->to_unit_ar . ' مع شرح وأمثلة وأسئلة شائعة وروابط داخلية.',
         ]);
     }

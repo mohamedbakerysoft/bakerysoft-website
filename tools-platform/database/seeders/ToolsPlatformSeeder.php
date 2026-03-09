@@ -298,7 +298,7 @@ class ToolsPlatformSeeder extends Seeder
             'slug_ar' => ArabicSlug::make($name),
             'description' => 'أداة عربية لحساب ' . $name . ' مع شرح مبسط وأمثلة عملية وأسئلة شائعة وروابط داخلية.',
             'tool_type' => $type,
-            'meta_title' => $name . ' | أدوات BakerySoft العربية',
+            'meta_title' => $name . ' | أدوات Calclyo العربية',
             'meta_description' => 'استخدم ' . $name . ' باللغة العربية للحصول على نتائج دقيقة وسريعة مع أمثلة وشرح وFAQ.',
             'schema' => $schema,
             'settings' => $settings,

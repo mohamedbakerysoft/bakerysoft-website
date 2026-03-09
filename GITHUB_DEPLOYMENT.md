@@ -1,4 +1,4 @@
-# GitHub deployment workflow for tools.bakerysoft.net
+# GitHub deployment workflow for calclyo.com
 
 This repository now contains the Laravel tools platform under `tools-platform/`.
 
@@ -41,11 +41,11 @@ REPO_URL=<YOUR_GITHUB_REPO_URL> ./scripts/setup_github_source_on_rpi.sh
 
 This will create:
 
-- source checkout: `/var/www/tools.bakerysoft.net/source`
+- source checkout: `/var/www/calclyo.com/source`
 
 The live deployed app remains:
 
-- live app: `/var/www/tools.bakerysoft.net/platform`
+- live app: `/var/www/calclyo.com/platform`
 
 ## First deploy from the Git checkout on the Pi
 
@@ -53,7 +53,7 @@ SSH into the Pi:
 
 ```bash
 ssh jarvis@jarvis.local
-cd /var/www/tools.bakerysoft.net/source
+cd /var/www/calclyo.com/source
 git pull origin main
 chmod +x scripts/server_deploy_tools_platform_from_repo.sh
 ./scripts/server_deploy_tools_platform_from_repo.sh
@@ -64,7 +64,7 @@ chmod +x scripts/server_deploy_tools_platform_from_repo.sh
 Local machine:
 
 ```bash
-cd /path/to/bakerysoft-website
+cd /path/to/calclyo-project
 git add .
 git commit -m "Describe your change"
 git push origin main
@@ -74,7 +74,7 @@ Raspberry Pi:
 
 ```bash
 ssh jarvis@jarvis.local
-cd /var/www/tools.bakerysoft.net/source
+cd /var/www/calclyo.com/source
 git pull origin main
 ./scripts/server_deploy_tools_platform_from_repo.sh
 ```
