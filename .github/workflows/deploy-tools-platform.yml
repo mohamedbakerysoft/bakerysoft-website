@@ -1,0 +1,28 @@
+name: Deploy Tools Platform
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "tools-platform/**"
+      - "scripts/server_deploy_tools_platform_from_repo.sh"
+      - ".github/workflows/deploy-tools-platform.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy on Raspberry Pi via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.TOOLS_PI_HOST }}
+          username: ${{ secrets.TOOLS_PI_USER }}
+          key: ${{ secrets.TOOLS_PI_SSH_KEY }}
+          script: |
+            cd /var/www/tools.bakerysoft.net/source
+            git pull origin main
+            chmod +x scripts/server_deploy_tools_platform_from_repo.sh
+            scripts/server_deploy_tools_platform_from_repo.sh

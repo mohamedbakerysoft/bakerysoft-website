@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BakerySoft Tools</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe7;
+      --panel: #fffaf3;
+      --ink: #1f2933;
+      --accent: #b3541e;
+      --line: #e6d7c8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, serif;
+      background:
+        radial-gradient(circle at top left, #fff6ea 0, transparent 30%),
+        linear-gradient(135deg, #f4efe7, #efe2d0);
+      color: var(--ink);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    main {
+      width: min(720px, 100%);
+      background: rgba(255, 250, 243, 0.94);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 24px 80px rgba(74, 45, 19, 0.12);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 0.03em;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      max-width: 46ch;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="tag">BakerySoft</div>
+    <h1>Tools</h1>
+    <p>This subdomain is ready on the Raspberry Pi. You can use it for internal tools, dashboards, or small utility pages.</p>
+  </main>
+</body>
+</html>

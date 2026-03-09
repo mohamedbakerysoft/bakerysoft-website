@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $metaTitle ?? 'أدوات BakerySoft العربية' }}</title>
+    <meta name="description" content="{{ $metaDescription ?? 'منصة أدوات عربية للحاسبات والمحولات والمال والاستثمار.' }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @php
+        $websiteSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'WebSite',
+            'name' => 'أدوات BakerySoft',
+            'url' => url('/'),
+            'potentialAction' => [
+                '@type' => 'SearchAction',
+                'target' => url('/?q={search_term_string}'),
+                'query-input' => 'required name=search_term_string',
+            ],
+        ];
+    @endphp
+    <script type="application/ld+json">
+        {!! json_encode($websiteSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+    </script>
+</head>
+<body x-data="themeToggle" x-init="init">
+    <div class="relative overflow-hidden bg-[radial-gradient(circle_at_top_right,_rgba(37,99,235,0.16),_transparent_30%),linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] dark:bg-[radial-gradient(circle_at_top_right,_rgba(59,130,246,0.2),_transparent_28%),linear-gradient(180deg,#020617_0%,#0f172a_100%)]">
+        <header class="shell sticky top-0 z-30 pt-4">
+            <div class="card-panel flex items-center justify-between gap-4 px-5 py-4 backdrop-blur">
+                <a href="{{ route('home') }}" class="text-lg font-extrabold text-slate-900 dark:text-white">أدوات BakerySoft</a>
+                <nav class="hidden items-center gap-5 text-sm font-semibold text-slate-600 dark:text-slate-300 md:flex">
+                    <a href="{{ route('category.show', ['categorySlug' => 'ادوات-الاستثمار']) }}">الاستثمار</a>
+                    <a href="{{ route('category.show', ['categorySlug' => 'ادوات-المال']) }}">المال</a>
+                    <a href="{{ route('category.show', ['categorySlug' => 'المحولات']) }}">المحولات</a>
+                    <a href="{{ route('category.show', ['categorySlug' => 'الحاسبات-اليومية']) }}">اليومي</a>
+                </nav>
+                <button type="button" class="btn-secondary !px-4 !py-2" @click="toggle">
+                    <span x-show="!dark">الوضع الداكن</span>
+                    <span x-show="dark">الوضع الفاتح</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="pb-16">
+            @yield('content')
+        </main>
+
+        <footer class="shell pb-10">
+            <div class="card-panel grid gap-8 px-6 py-8 md:grid-cols-3">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">أدوات BakerySoft</h3>
+                    <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">منصة عربية قابلة للتوسع لبناء حاسبات ومحولات وصفحات SEO عالية الجودة تخدم البحث العضوي والإعلانات.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white">الأقسام</h4>
+                    <div class="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                        <a class="block" href="{{ route('category.show', ['categorySlug' => 'ادوات-الاستثمار']) }}">أدوات الاستثمار</a>
+                        <a class="block" href="{{ route('category.show', ['categorySlug' => 'ادوات-المال']) }}">أدوات المال</a>
+                        <a class="block" href="{{ route('category.show', ['categorySlug' => 'المحولات']) }}">المحولات</a>
+                        <a class="block" href="{{ route('category.show', ['categorySlug' => 'الحاسبات-اليومية']) }}">الحاسبات اليومية</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white">مواضع الإعلانات</h4>
+                    <div class="mt-3 ad-slot">AdSense Placeholder / Footer</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

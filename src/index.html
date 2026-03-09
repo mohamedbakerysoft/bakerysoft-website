@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BakerySoft</title>
-    <link rel="stylesheet" href="/node_modules/owl.carousel/dist/assets/owl.carousel.min.css" />
 </head>
 
 <body>
@@ -734,41 +733,6 @@
         <!--livechat top end-->
 
     </footer>
-    <script src="/node_modules/jquery/dist/jquery.js"></script>
-    <script src="/node_modules/owl.carousel/dist/owl.carousel.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#news-slider").owlCarousel({
-                nav: true,
-                items: 3,
-                itemsDesktop: [1199, 3],
-                itemsDesktopSmall: [980, 2],
-                itemsMobile: [600, 1],
-                navigation: true,
-                navigationText: ["", ""],
-                pagination: true,
-                autoplay: true,
-                loop: true,
-                responsiveClass: true,
-                responsive: {
-                    0: {
-                        items: 1,
-                    },
-                    700: {
-                        items: 2,
-                    },
-                    1000: {
-                        items: 3,
-                    }
-                }
-            });
-        });
-    </script>
-    <script>
-        document.querySelector("#launch").addEventListener("click", function () {
-            document.querySelector("#smith-container").classList.toggle("active");
-        });
-    </script>
 </body>
 
 </html>

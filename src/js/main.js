@@ -1,12 +1,13 @@
-import { $, jQuery } from "jquery";
+import $ from "jquery";
+
 let navbar = document.getElementById("main-nav");
-let navPos = navbar.getBoundingClientRect().top;
+let navPos = navbar ? navbar.getBoundingClientRect().top : 0;
 
 window.addEventListener("scroll", (e) => {
   let scrollPos = window.scrollY;
-  if (scrollPos > navPos) {
+  if (navbar && scrollPos > navPos) {
     navbar.classList.add("sticky");
-  } else {
+  } else if (navbar) {
     navbar.classList.remove("sticky");
   }
 });
@@ -27,3 +28,41 @@ for (let i = 0; i < tabLink.length; i++) {
 }
 
 // projects
+$(function () {
+  const slider = $("#news-slider");
+  if (slider.length && typeof slider.owlCarousel === "function") {
+    slider.owlCarousel({
+      nav: true,
+      items: 3,
+      itemsDesktop: [1199, 3],
+      itemsDesktopSmall: [980, 2],
+      itemsMobile: [600, 1],
+      navigation: true,
+      navigationText: ["", ""],
+      pagination: true,
+      autoplay: true,
+      loop: true,
+      responsiveClass: true,
+      responsive: {
+        0: {
+          items: 1,
+        },
+        700: {
+          items: 2,
+        },
+        1000: {
+          items: 3,
+        },
+      },
+    });
+  }
+});
+
+const launchButton = document.querySelector("#launch");
+const chatContainer = document.querySelector("#smith-container");
+
+if (launchButton && chatContainer) {
+  launchButton.addEventListener("click", function () {
+    chatContainer.classList.toggle("active");
+  });
+}
