@@ -50,4 +50,19 @@ class PlatformPagesTest extends TestCase
         $response->assertSee('تحويل دولار أمريكي إلى جنيه مصري');
         $response->assertSee('نتيجة التحويل');
     }
+
+    public function test_static_pages_render(): void
+    {
+        $this->get(route('about'))
+            ->assertOk()
+            ->assertSee('من نحن');
+
+        $this->get(route('privacy'))
+            ->assertOk()
+            ->assertSee('سياسة الخصوصية');
+
+        $this->get(route('contact'))
+            ->assertOk()
+            ->assertSee('اتصل بنا');
+    }
 }

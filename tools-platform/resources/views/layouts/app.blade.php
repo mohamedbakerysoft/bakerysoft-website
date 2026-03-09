@@ -41,6 +41,7 @@
                     <a href="{{ route('category.show', ['categorySlug' => 'ادوات-المال']) }}">أدوات المال</a>
                     <a href="{{ route('category.show', ['categorySlug' => 'المحولات']) }}">المحولات</a>
                     <a href="{{ route('category.show', ['categorySlug' => 'الحاسبات-اليومية']) }}">الحاسبات اليومية</a>
+                    <a href="{{ route('about') }}">من نحن</a>
                 </nav>
                 <button type="button" class="btn-secondary !px-4 !py-2" @click="toggle">
                     <span x-show="!dark">الوضع الداكن</span>
@@ -54,7 +55,7 @@
         </main>
 
         <footer class="shell pb-10">
-            <div class="card-panel grid gap-8 px-6 py-8 md:grid-cols-3">
+            <div class="card-panel grid gap-8 px-6 py-8 md:grid-cols-4">
                 <div>
                     <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="BakerySoft Tools" class="h-10 w-auto max-w-full dark:brightness-110">
                     <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">منصة عربية عملية تساعد المستخدم على الحساب والتحويل بسرعة، مع واجهات واضحة ونتائج قابلة للفهم من أول نظرة.</p>
@@ -66,6 +67,14 @@
                         <a class="block" href="{{ route('category.show', ['categorySlug' => 'ادوات-المال']) }}">أدوات المال</a>
                         <a class="block" href="{{ route('category.show', ['categorySlug' => 'المحولات']) }}">المحولات</a>
                         <a class="block" href="{{ route('category.show', ['categorySlug' => 'الحاسبات-اليومية']) }}">الحاسبات اليومية</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 dark:text-white">صفحات مهمة</h4>
+                    <div class="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                        <a class="block" href="{{ route('about') }}">من نحن</a>
+                        <a class="block" href="{{ route('privacy') }}">سياسة الخصوصية</a>
+                        <a class="block" href="{{ route('contact') }}">اتصل بنا</a>
                     </div>
                 </div>
                 <div>

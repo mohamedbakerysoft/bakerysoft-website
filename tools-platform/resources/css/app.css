@@ -67,4 +67,27 @@
     .btn-secondary {
         @apply inline-flex items-center justify-center rounded-2xl border border-slate-300 px-5 py-3 text-sm font-bold text-slate-700 hover:border-blue-500 hover:text-blue-600 dark:border-slate-700 dark:text-slate-200 dark:hover:text-blue-300;
     }
+
+    .page-hero {
+        @apply rounded-3xl border border-slate-200/80 bg-white px-6 py-8 shadow-sm shadow-slate-200/60 dark:border-slate-800 dark:bg-slate-900 md:px-10 md:py-10;
+    }
+
+    .info-card {
+        @apply rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900;
+    }
+
+    .info-card h2,
+    .policy-item h2,
+    .policy-item h3 {
+        @apply text-lg font-bold text-slate-900 dark:text-white;
+    }
+
+    .info-card p,
+    .policy-item p {
+        @apply mt-3 text-sm leading-8 text-slate-600 dark:text-slate-300;
+    }
+
+    .policy-item {
+        @apply rounded-3xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-950/60;
+    }
 }
