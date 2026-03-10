@@ -288,14 +288,38 @@ class ToolCalculator
         $birth = Carbon::parse($input['birth_date']);
         $now = now();
         $diff = $birth->diff($now);
+        $nextBirthday = $birth->copy()->year($now->year);
+
+        if ($nextBirthday->lessThanOrEqualTo($now)) {
+            $nextBirthday->addYear();
+        }
+
+        $totalMonths = ($diff->y * 12) + $diff->m;
+        $totalWeeks = $birth->diffInWeeks($now);
+        $totalDays = $birth->diffInDays($now);
+        $totalHours = $birth->diffInHours($now);
+        $totalMinutes = $birth->diffInMinutes($now);
+        $totalSeconds = $birth->diffInSeconds($now);
+        $daysUntilBirthday = $now->diffInDays($nextBirthday);
+        $nextBirthdayLabel = $daysUntilBirthday === 0
+            ? 'اليوم'
+            : 'بعد ' . $this->integer($daysUntilBirthday) . ' يوم';
 
         return [
             'rows' => [
-                ['label' => 'العمر بالسنوات', 'value' => (string) $diff->y],
-                ['label' => 'العمر بالشهور', 'value' => (string) ($diff->y * 12 + $diff->m)],
-                ['label' => 'العمر بالأيام', 'value' => (string) $birth->diffInDays($now)],
+                ['label' => 'العمر الكامل', 'value' => $this->integer($diff->y) . ' سنة و' . $this->integer($diff->m) . ' شهر و' . $this->integer($diff->d) . ' يوم'],
+                ['label' => 'إجمالي الشهور', 'value' => $this->integer($totalMonths) . ' شهر'],
+                ['label' => 'إجمالي الأسابيع', 'value' => $this->integer($totalWeeks) . ' أسبوع', 'key' => 'weeks'],
+                ['label' => 'إجمالي الأيام', 'value' => $this->integer($totalDays) . ' يوم', 'key' => 'days'],
+                ['label' => 'إجمالي الساعات', 'value' => $this->integer($totalHours) . ' ساعة', 'key' => 'hours'],
+                ['label' => 'إجمالي الدقائق', 'value' => $this->integer($totalMinutes) . ' دقيقة', 'key' => 'minutes'],
+                ['label' => 'إجمالي الثواني', 'value' => $this->integer($totalSeconds) . ' ثانية', 'key' => 'seconds'],
+                ['label' => 'عيد الميلاد القادم', 'value' => $nextBirthday->translatedFormat('j F Y') . ' - ' . $nextBirthdayLabel],
             ],
-            'summary' => 'العمر الحالي هو ' . $diff->y . ' سنة و' . $diff->m . ' شهر.',
+            'summary' => 'العمر الحالي هو ' . $this->integer($diff->y) . ' سنة و' . $this->integer($diff->m) . ' شهر و' . $this->integer($diff->d) . ' يوم، ويتم تحديث الساعات والدقائق والثواني تلقائيًا أثناء فتح الصفحة.',
+            'liveAge' => [
+                'birthIso' => $birth->toIso8601String(),
+            ],
         ];
     }
 
@@ -456,5 +480,10 @@ class ToolCalculator
     private function format(float $value): string
     {
         return number_format($value, 2, '.', ',');
+    }
+
+    private function integer(int|float $value): string
+    {
+        return number_format((float) $value, 0, '.', ',');
     }
 }

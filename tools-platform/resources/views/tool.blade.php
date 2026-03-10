@@ -56,13 +56,23 @@
 
             <div class="space-y-6">
                 @if ($result)
-                    <div class="card-panel px-6 py-8">
+                    <div
+                        class="card-panel px-6 py-8"
+                        @if (! empty($result['liveAge']))
+                            data-live-age='@json($result['liveAge'])'
+                        @endif
+                    >
                         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">النتيجة</h2>
                         <div class="mt-5 space-y-4">
                             @foreach ($result['rows'] ?? [] as $row)
                                 <div class="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 px-4 py-3 dark:bg-slate-950">
                                     <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">{{ $row['label'] }}</span>
-                                    <span class="text-base font-extrabold text-slate-900 dark:text-white">{{ $row['value'] }}</span>
+                                    <span
+                                        class="text-base font-extrabold text-slate-900 dark:text-white"
+                                        @if (! empty($row['key']))
+                                            data-live-age-value="{{ $row['key'] }}"
+                                        @endif
+                                    >{{ $row['value'] }}</span>
                                 </div>
                             @endforeach
                         </div>
