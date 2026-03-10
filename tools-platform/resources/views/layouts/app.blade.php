@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $metaTitle ?? 'أدوات Calclyo العربية' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'منصة أدوات عربية للحاسبات والمحولات والمال والاستثمار.' }}">
+    <meta name="robots" content="{{ $metaRobots ?? 'index,follow' }}">
+    <link rel="canonical" href="{{ $canonicalUrl ?? url()->current() }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('brand/favicon.svg') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,10 +79,6 @@
                         <a class="block" href="{{ route('privacy') }}">سياسة الخصوصية</a>
                         <a class="block" href="{{ route('contact') }}">اتصل بنا</a>
                     </div>
-                </div>
-                <div>
-                    <h4 class="font-bold text-slate-900 dark:text-white">مواضع الإعلانات</h4>
-                    <div class="mt-3 ad-slot">AdSense Placeholder / Footer</div>
                 </div>
             </div>
         </footer>

@@ -14,6 +14,7 @@ class PageController extends Controller
         return view('pages.about', [
             'metaTitle' => 'من نحن | أدوات Calclyo',
             'metaDescription' => 'تعرف على منصة أدوات Calclyo العربية ورسالتها في تقديم حاسبات ومحولات واضحة وسريعة للمستخدم العربي.',
+            'canonicalUrl' => route('about'),
         ]);
     }
 
@@ -22,6 +23,7 @@ class PageController extends Controller
         return view('pages.privacy', [
             'metaTitle' => 'سياسة الخصوصية | أدوات Calclyo',
             'metaDescription' => 'سياسة الخصوصية الخاصة بموقع أدوات Calclyo وكيفية التعامل مع البيانات وملفات تعريف الارتباط والخدمات الإعلانية.',
+            'canonicalUrl' => route('privacy'),
         ]);
     }
 
@@ -30,7 +32,8 @@ class PageController extends Controller
         return view('pages.contact', [
             'metaTitle' => 'اتصل بنا | أدوات Calclyo',
             'metaDescription' => 'طرق التواصل مع فريق أدوات Calclyo للاستفسارات التقنية والتجارية وملاحظات تحسين الموقع.',
-            'supportEmail' => 'hello@calclyo.com',
+            'supportEmail' => 'mohamed.bakerysoft@gmail.com',
+            'canonicalUrl' => route('contact'),
         ]);
     }
 
@@ -105,6 +108,7 @@ class PageController extends Controller
 
         return response(implode("\n", $xml), 200, [
             'Content-Type' => 'application/xml; charset=UTF-8',
+            'Cache-Control' => 'public, max-age=3600',
         ]);
     }
 
@@ -117,6 +121,7 @@ class PageController extends Controller
             'Sitemap: ' . route('sitemap'),
         ]), 200, [
             'Content-Type' => 'text/plain; charset=UTF-8',
+            'Cache-Control' => 'public, max-age=3600',
         ]);
     }
 
@@ -124,6 +129,7 @@ class PageController extends Controller
     {
         return response('google.com, pub-7475653835852794, DIRECT, f08c47fec0942fa0', 200, [
             'Content-Type' => 'text/plain; charset=UTF-8',
+            'Cache-Control' => 'public, max-age=3600',
         ]);
     }
 }

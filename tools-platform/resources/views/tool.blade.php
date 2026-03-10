@@ -55,8 +55,6 @@
             </div>
 
             <div class="space-y-6">
-                <div class="ad-slot">AdSense Placeholder / Top Banner</div>
-
                 @if ($result)
                     <div class="card-panel px-6 py-8">
                         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">النتيجة</h2>
@@ -69,7 +67,6 @@
                             @endforeach
                         </div>
                         <p class="mt-5 text-sm leading-8 text-slate-600 dark:text-slate-300">{{ $result['summary'] ?? '' }}</p>
-                        <div class="mt-6 ad-slot">AdSense Placeholder / After Result</div>
                     </div>
                 @else
                     <div class="card-panel px-6 py-8">
@@ -116,10 +113,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="shell pt-12">
-        <div class="ad-slot">AdSense Placeholder / Inside Content</div>
     </section>
 
     <section class="shell pt-12">

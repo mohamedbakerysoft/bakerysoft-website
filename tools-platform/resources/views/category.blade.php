@@ -20,7 +20,6 @@
                 <div class="mt-8">{{ $tools->links() }}</div>
             </div>
             <aside class="space-y-6">
-                <div class="ad-slot">AdSense Placeholder / Sidebar</div>
                 <div class="card-panel px-6 py-6">
                     <h2 class="text-xl font-bold text-slate-900 dark:text-white">أقسام مرتبطة</h2>
                     <div class="mt-4 space-y-3 text-sm leading-7 text-slate-600 dark:text-slate-300">

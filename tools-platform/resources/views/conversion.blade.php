@@ -6,7 +6,7 @@
             <div class="card-panel px-6 py-8 md:px-8">
                 <span class="chip">محول سريع ودقيق</span>
                 <h1 class="mt-4 text-4xl font-extrabold text-slate-950 dark:text-white">تحويل {{ $conversion->from_unit_ar }} إلى {{ $conversion->to_unit_ar }}</h1>
-                <p class="mt-5 text-lg leading-9 text-slate-600 dark:text-slate-300">أدخل القيمة التي تريد تحويلها من {{ $conversion->from_unit_ar }} إلى {{ $conversion->to_unit_ar }} وستظهر لك النتيجة فورًا مع معدل التحويل وروابط مفيدة لوحدات قريبة.</p>
+                <p class="mt-5 text-lg leading-9 text-slate-600 dark:text-slate-300">{{ $pageCopy['intro'] }}</p>
 
                 <form method="get" class="mt-8 grid gap-4 md:grid-cols-[1fr_auto]">
                     <label class="block">
@@ -18,7 +18,6 @@
             </div>
 
             <div class="space-y-6">
-                <div class="ad-slot">AdSense Placeholder / Top Banner</div>
                 <div class="card-panel px-6 py-8">
                     <h2 class="text-2xl font-bold text-slate-900 dark:text-white">نتيجة التحويل</h2>
                     <div class="mt-5 space-y-4">
@@ -40,29 +39,23 @@
             <div class="card-panel px-6 py-8">
                 <h2 class="text-2xl font-bold text-slate-900 dark:text-white">طريقة الاستخدام</h2>
                 <div class="mt-5 space-y-4 text-sm leading-8 text-slate-600 dark:text-slate-300">
-                    <p>أدخل القيمة التي تريد تحويلها من {{ $conversion->from_unit_ar }} إلى {{ $conversion->to_unit_ar }}، ثم اضغط على زر التحويل.</p>
-                    <p>ستحصل على الناتج مباشرة مع معدل التحويل الحالي المستخدم داخل هذه الصفحة حتى تتمكن من المراجعة أو المقارنة بسرعة.</p>
-                    <p>يمكنك أيضًا الانتقال إلى تحويلات أخرى من نفس الوحدة المصدر عبر الروابط ذات الصلة أدناه.</p>
+                    @foreach ($pageCopy['usage'] as $paragraph)
+                        <p>{{ $paragraph }}</p>
+                    @endforeach
                 </div>
             </div>
             <div class="card-panel px-6 py-8">
                 <h2 class="text-2xl font-bold text-slate-900 dark:text-white">أسئلة شائعة</h2>
                 <div class="mt-5 space-y-4">
-                    <details class="rounded-2xl border border-slate-200 px-4 py-4 dark:border-slate-800">
-                        <summary class="cursor-pointer text-sm font-bold text-slate-900 dark:text-white">هل هذا التحويل ثابت؟</summary>
-                        <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">في الوحدات القياسية يكون ثابتًا، أما العملات فهي تقريبية ويمكن تحديثها دوريًا حسب مصدر الأسعار.</p>
-                    </details>
-                    <details class="rounded-2xl border border-slate-200 px-4 py-4 dark:border-slate-800">
-                        <summary class="cursor-pointer text-sm font-bold text-slate-900 dark:text-white">كيف أستخدم هذه الصفحة في المقارنة؟</summary>
-                        <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">بدّل القيمة أكثر من مرة، وجرّب الروابط المجاورة للوصول إلى وجهات تحويل مختلفة من نفس الوحدة.</p>
-                    </details>
+                    @foreach ($pageCopy['faq'] as $faq)
+                        <details class="rounded-2xl border border-slate-200 px-4 py-4 dark:border-slate-800">
+                            <summary class="cursor-pointer text-sm font-bold text-slate-900 dark:text-white">{{ $faq['question'] }}</summary>
+                            <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{{ $faq['answer'] }}</p>
+                        </details>
+                    @endforeach
                 </div>
             </div>
         </div>
-    </section>
-
-    <section class="shell pt-12">
-        <div class="ad-slot">AdSense Placeholder / Inside Content</div>
     </section>
 
     <section class="shell pt-12">

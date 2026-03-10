@@ -18,7 +18,6 @@
                 </div>
             </div>
             <div class="grid gap-6">
-                <div class="ad-slot">AdSense Placeholder / Top Banner</div>
                 <div class="card-panel px-6 py-8">
                     <h2 class="text-xl font-bold text-slate-900 dark:text-white">الأدوات الأكثر استخدامًا</h2>
                     <div class="mt-4 space-y-3 text-sm text-slate-600 dark:text-slate-300">
@@ -58,10 +57,6 @@
         <div class="mt-8">
             @include('partials.tool-grid', ['tools' => $featuredTools])
         </div>
-    </section>
-
-    <section class="shell pt-16">
-        <div class="ad-slot">AdSense Placeholder / Inside Content</div>
     </section>
 
     <section class="shell pt-16">

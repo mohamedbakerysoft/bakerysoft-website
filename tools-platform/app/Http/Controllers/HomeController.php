@@ -26,6 +26,8 @@ class HomeController extends Controller
             'query' => $query,
             'metaTitle' => 'أدوات Calclyo العربية للحاسبات والمحولات والاستثمار',
             'metaDescription' => 'منصة عربية تضم مئات الحاسبات والمحولات وأدوات المال والاستثمار مع صفحات SEO داخلية قابلة للتوسع.',
+            'canonicalUrl' => route('home'),
+            'metaRobots' => $query !== '' ? 'noindex,follow' : 'index,follow',
         ]);
     }
 }

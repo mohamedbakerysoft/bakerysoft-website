@@ -31,6 +31,8 @@ class ToolController extends Controller
             'relatedTools' => $relatedTools,
             'metaTitle' => $tool->meta_title,
             'metaDescription' => $tool->meta_description,
+            'canonicalUrl' => route('tool.show', ['categorySlug' => $tool->category->slug_ar, 'toolSlug' => $tool->slug_ar]),
+            'metaRobots' => $request->query() ? 'noindex,follow' : 'index,follow',
         ]);
     }
 }
