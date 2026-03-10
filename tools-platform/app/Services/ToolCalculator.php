@@ -45,14 +45,16 @@ class ToolCalculator
     public function convertPage(Conversion $conversion, float $amount): array
     {
         $result = $amount * $conversion->ratio;
+        $reverseRatio = $conversion->ratio > 0 ? (1 / $conversion->ratio) : 0;
 
         return [
             'rows' => [
                 ['label' => 'القيمة المدخلة', 'value' => $this->format($amount)],
                 ['label' => 'سعر التحويل', 'value' => '1 ' . $conversion->from_unit_ar . ' = ' . $this->format($conversion->ratio) . ' ' . $conversion->to_unit_ar],
                 ['label' => 'الناتج', 'value' => $this->format($result) . ' ' . $conversion->to_unit_ar],
+                ['label' => 'السعر العكسي', 'value' => '1 ' . $conversion->to_unit_ar . ' = ' . $this->format($reverseRatio) . ' ' . $conversion->from_unit_ar],
             ],
-            'summary' => 'كل ' . $this->format($amount) . ' ' . $conversion->from_unit_ar . ' تساوي ' . $this->format($result) . ' ' . $conversion->to_unit_ar,
+            'summary' => 'كل ' . $this->format($amount) . ' ' . $conversion->from_unit_ar . ' تساوي ' . $this->format($result) . ' ' . $conversion->to_unit_ar . ' وفق معدل تحويل تقريبي قدره ' . $this->format($conversion->ratio) . '.',
         ];
     }
 
@@ -83,14 +85,22 @@ class ToolCalculator
 
         $contributed = $principal + ($monthlyContribution * 12 * $years);
         $profit = $balance - $contributed;
+        $growth = $contributed > 0 ? ($profit / $contributed) * 100 : 0;
+        $profitShare = $balance > 0 ? ($profit / $balance) * 100 : 0;
+        $avgAnnualGain = $years > 0 ? ($profit / $years) : 0;
+        $doubleYears = $rate > 0 ? 72 / ($rate * 100) : null;
 
         return [
             'rows' => [
                 ['label' => 'القيمة المستقبلية', 'value' => $this->money($balance, $currency)],
                 ['label' => 'إجمالي المساهمات', 'value' => $this->money($contributed, $currency)],
                 ['label' => 'الأرباح المتوقعة', 'value' => $this->money($profit, $currency)],
+                ['label' => 'نسبة النمو الكلية', 'value' => $this->percent($growth)],
+                ['label' => 'نسبة الأرباح من الرصيد النهائي', 'value' => $this->percent($profitShare)],
+                ['label' => 'متوسط الربح السنوي', 'value' => $this->money($avgAnnualGain, $currency)],
+                ['label' => 'المدة التقريبية لمضاعفة المال', 'value' => $doubleYears ? number_format($doubleYears, 1) . ' سنة' : 'غير متاح'],
             ],
-            'summary' => 'إذا استثمرت ' . $this->money($principal, $currency) . ' بمعدل ' . (($rate * 100)) . '% لمدة ' . $years . ' سنة فالقيمة المتوقعة هي ' . $this->money($balance, $currency) . '.',
+            'summary' => 'إذا استثمرت ' . $this->money($principal, $currency) . ' مع إضافة شهرية قدرها ' . $this->money($monthlyContribution, $currency) . ' وبمعدل ' . (($rate * 100)) . '% لمدة ' . $years . ' سنة، فالقيمة المتوقعة هي ' . $this->money($balance, $currency) . ' مع نمو كلي يقارب ' . $this->percent($growth) . '.',
             'chart' => $points,
         ];
     }
@@ -110,14 +120,21 @@ class ToolCalculator
 
         $total = $payment * $months;
         $interest = $total - $amount;
+        $interestShare = $total > 0 ? ($interest / $total) * 100 : 0;
+        $annualPayments = $payment * 12;
+        $minimumIncome = $payment / 0.35;
 
         return [
             'rows' => [
                 ['label' => 'القسط الشهري', 'value' => $this->money($payment, $currency)],
                 ['label' => 'إجمالي السداد', 'value' => $this->money($total, $currency)],
                 ['label' => 'إجمالي الفوائد', 'value' => $this->money($interest, $currency)],
+                ['label' => 'مدة السداد', 'value' => $this->integer($months) . ' شهر'],
+                ['label' => 'القسط السنوي', 'value' => $this->money($annualPayments, $currency)],
+                ['label' => 'نسبة الفوائد من إجمالي السداد', 'value' => $this->percent($interestShare)],
+                ['label' => 'دخل شهري مريح للقسط', 'value' => $this->money($minimumIncome, $currency)],
             ],
-            'summary' => 'قسط قرض بقيمة ' . $this->money($amount, $currency) . ' لمدة ' . $years . ' سنة يساوي تقريبًا ' . $this->money($payment, $currency) . ' شهريًا.',
+            'summary' => 'قرض بقيمة ' . $this->money($amount, $currency) . ' لمدة ' . $years . ' سنة يحتاج إلى قسط شهري يقارب ' . $this->money($payment, $currency) . '، بينما يصل إجمالي الفوائد إلى ' . $this->money($interest, $currency) . '.',
         ];
     }
 
@@ -130,14 +147,20 @@ class ToolCalculator
         $profit = $final - $initial;
         $roi = $initial > 0 ? ($profit / $initial) * 100 : 0;
         $annualized = $initial > 0 ? ((pow(max($final, 0.01) / max($initial, 0.01), 12 / $months) - 1) * 100) : 0;
+        $avgMonthlyProfit = $profit / $months;
+        $monthlyReturn = $initial > 0 ? (($profit / $initial) / $months) * 100 : 0;
+        $multiple = $initial > 0 ? number_format($final / $initial, 2) . 'x' : 'غير متاح';
 
         return [
             'rows' => [
                 ['label' => 'الربح الصافي', 'value' => $this->money($profit, $currency)],
                 ['label' => 'نسبة العائد', 'value' => $this->percent($roi)],
                 ['label' => 'العائد السنوي التقريبي', 'value' => $this->percent($annualized)],
+                ['label' => 'متوسط الربح الشهري', 'value' => $this->money($avgMonthlyProfit, $currency)],
+                ['label' => 'متوسط العائد الشهري', 'value' => $this->percent($monthlyReturn)],
+                ['label' => 'القيمة النهائية مقارنة بالبداية', 'value' => $multiple],
             ],
-            'summary' => 'ارتفع الاستثمار من ' . $this->money($initial, $currency) . ' إلى ' . $this->money($final, $currency) . ' بعائد إجمالي ' . $this->percent($roi) . '.',
+            'summary' => 'ارتفع الاستثمار من ' . $this->money($initial, $currency) . ' إلى ' . $this->money($final, $currency) . ' بعائد إجمالي ' . $this->percent($roi) . ' ومتوسط ربح شهري يقارب ' . $this->money($avgMonthlyProfit, $currency) . '.',
         ];
     }
 
@@ -152,6 +175,8 @@ class ToolCalculator
         $revenue = ($quantity * $sell) - $fees;
         $profit = $revenue - $cost;
         $margin = $cost > 0 ? ($profit / $cost) * 100 : 0;
+        $profitPerUnit = $quantity > 0 ? $profit / $quantity : 0;
+        $breakEvenSell = $quantity > 0 ? (($quantity * $buy) + (2 * $fees)) / $quantity : 0;
 
         return [
             'rows' => [
@@ -159,8 +184,10 @@ class ToolCalculator
                 ['label' => 'قيمة البيع', 'value' => $this->money($revenue, $currency)],
                 ['label' => 'صافي الربح', 'value' => $this->money($profit, $currency)],
                 ['label' => 'نسبة الربح', 'value' => $this->percent($margin)],
+                ['label' => 'الربح لكل وحدة', 'value' => $this->money($profitPerUnit, $currency)],
+                ['label' => 'سعر التعادل للوحدة', 'value' => $this->money($breakEvenSell, $currency)],
             ],
-            'summary' => 'صافي الربح من الصفقة يساوي ' . $this->money($profit, $currency) . ' بنسبة ' . $this->percent($margin) . '.',
+            'summary' => 'صافي الربح من الصفقة يساوي ' . $this->money($profit, $currency) . ' بنسبة ' . $this->percent($margin) . '، بينما يكون سعر التعادل التقريبي للوحدة ' . $this->money($breakEvenSell, $currency) . '.',
         ];
     }
 
@@ -171,13 +198,16 @@ class ToolCalculator
         $cost = (float) ($input['cost'] ?? 0);
         $profit = $revenue - $cost;
         $margin = $revenue > 0 ? ($profit / $revenue) * 100 : 0;
+        $markup = $cost > 0 ? ($profit / $cost) * 100 : 0;
 
         return [
             'rows' => [
                 ['label' => 'الربح', 'value' => $this->money($profit, $currency)],
                 ['label' => 'هامش الربح', 'value' => $this->percent($margin)],
+                ['label' => 'نسبة الزيادة على التكلفة', 'value' => $this->percent($markup)],
+                ['label' => 'التكلفة كنسبة من الإيراد', 'value' => $this->percent($revenue > 0 ? ($cost / $revenue) * 100 : 0)],
             ],
-            'summary' => 'عند إيرادات ' . $this->money($revenue, $currency) . ' وتكلفة ' . $this->money($cost, $currency) . ' يصبح هامش الربح ' . $this->percent($margin) . '.',
+            'summary' => 'عند إيرادات ' . $this->money($revenue, $currency) . ' وتكلفة ' . $this->money($cost, $currency) . ' يصبح هامش الربح ' . $this->percent($margin) . ' ونسبة الزيادة على التكلفة ' . $this->percent($markup) . '.',
         ];
     }
 
@@ -191,10 +221,12 @@ class ToolCalculator
 
         return [
             'rows' => [
+                ['label' => 'السعر قبل الضريبة', 'value' => $this->money($amount, $currency)],
                 ['label' => 'قيمة الضريبة', 'value' => $this->money($vat, $currency)],
                 ['label' => 'الإجمالي بعد الضريبة', 'value' => $this->money($total, $currency)],
+                ['label' => 'نسبة الضريبة من الإجمالي', 'value' => $this->percent($total > 0 ? ($vat / $total) * 100 : 0)],
             ],
-            'summary' => 'ضريبة القيمة المضافة على ' . $this->money($amount, $currency) . ' بنسبة ' . $rate . '% تساوي ' . $this->money($vat, $currency) . '.',
+            'summary' => 'ضريبة القيمة المضافة على ' . $this->money($amount, $currency) . ' بنسبة ' . $rate . '% تساوي ' . $this->money($vat, $currency) . ' ليصبح الإجمالي ' . $this->money($total, $currency) . '.',
         ];
     }
 
@@ -208,10 +240,12 @@ class ToolCalculator
 
         return [
             'rows' => [
+                ['label' => 'السعر الأصلي', 'value' => $this->money($price, $currency)],
                 ['label' => 'قيمة الخصم', 'value' => $this->money($discount, $currency)],
                 ['label' => 'السعر بعد الخصم', 'value' => $this->money($final, $currency)],
+                ['label' => 'النسبة التي ستدفعها فعليًا', 'value' => $this->percent(max(0, 100 - $rate))],
             ],
-            'summary' => 'بعد خصم ' . $rate . '% يصبح السعر النهائي ' . $this->money($final, $currency) . '.',
+            'summary' => 'بعد خصم ' . $rate . '% ستوفر ' . $this->money($discount, $currency) . ' ويصبح السعر النهائي ' . $this->money($final, $currency) . '.',
         ];
     }
 
@@ -220,13 +254,16 @@ class ToolCalculator
         $base = (float) ($input['base_value'] ?? 0);
         $percentage = (float) ($input['percentage_value'] ?? 0);
         $result = $base * ($percentage / 100);
+        $onePercent = $base / 100;
 
         return [
             'rows' => [
                 ['label' => 'النسبة من الرقم', 'value' => $this->format($result)],
                 ['label' => 'القيمة الأصلية', 'value' => $this->format($base)],
+                ['label' => 'قيمة 1%', 'value' => $this->format($onePercent)],
+                ['label' => 'القيمة المتبقية بعد خصم النسبة', 'value' => $this->format($base - $result)],
             ],
-            'summary' => $percentage . '% من ' . $this->format($base) . ' تساوي ' . $this->format($result) . '.',
+            'summary' => $percentage . '% من ' . $this->format($base) . ' تساوي ' . $this->format($result) . '، بينما تمثل 1% من الرقم قيمة ' . $this->format($onePercent) . '.',
         ];
     }
 
@@ -236,12 +273,15 @@ class ToolCalculator
         $grams = (float) ($input['grams'] ?? 0);
         $price = (float) ($input['price_per_gram'] ?? 0);
         $value = $grams * $price;
+        $ounces = $grams / 31.1035;
 
         return [
             'rows' => [
                 ['label' => 'قيمة الذهب', 'value' => $this->money($value, $currency)],
+                ['label' => 'عدد الأوقيات التقريبي', 'value' => number_format($ounces, 2) . ' أوقية'],
+                ['label' => 'قيمة الأوقية التقريبية', 'value' => $this->money($price * 31.1035, $currency)],
             ],
-            'summary' => 'قيمة ' . $grams . ' جرام ذهب بسعر ' . $this->money($price, $currency) . ' للجرام هي ' . $this->money($value, $currency) . '.',
+            'summary' => 'قيمة ' . $grams . ' جرام ذهب بسعر ' . $this->money($price, $currency) . ' للجرام هي ' . $this->money($value, $currency) . '، أي ما يعادل تقريبًا ' . number_format($ounces, 2) . ' أوقية.',
         ];
     }
 
@@ -252,13 +292,17 @@ class ToolCalculator
         $rate = ((float) ($input['rate'] ?? 0)) / 100;
         $years = (float) ($input['years'] ?? 0);
         $futureCost = $amount * pow(1 + $rate, $years);
+        $loss = $amount > 0 ? (1 - ($amount / max($futureCost, 0.01))) * 100 : 0;
+        $monthlyInflation = $rate > 0 ? (pow(1 + $rate, 1 / 12) - 1) * 100 : 0;
 
         return [
             'rows' => [
                 ['label' => 'القيمة بعد التضخم', 'value' => $this->money($futureCost, $currency)],
                 ['label' => 'الزيادة المتوقعة', 'value' => $this->money($futureCost - $amount, $currency)],
+                ['label' => 'معدل التضخم الشهري التقريبي', 'value' => $this->percent($monthlyInflation)],
+                ['label' => 'تآكل القوة الشرائية', 'value' => $this->percent($loss)],
             ],
-            'summary' => 'مبلغ ' . $this->money($amount, $currency) . ' مع تضخم سنوي ' . (($rate * 100)) . '% يصبح ' . $this->money($futureCost, $currency) . ' بعد ' . $years . ' سنة.',
+            'summary' => 'مبلغ ' . $this->money($amount, $currency) . ' مع تضخم سنوي ' . (($rate * 100)) . '% يصبح ' . $this->money($futureCost, $currency) . ' بعد ' . $years . ' سنة، مع تآكل تقريبي في القوة الشرائية قدره ' . $this->percent($loss) . '.',
         ];
     }
 
@@ -269,13 +313,21 @@ class ToolCalculator
         $deductions = ((float) ($input['deductions_rate'] ?? 0)) / 100;
         $allowances = (float) ($input['allowances'] ?? 0);
         $netMonthly = ($monthlySalary + $allowances) * (1 - $deductions);
+        $grossMonthly = $monthlySalary + $allowances;
+        $deductionValue = $grossMonthly - $netMonthly;
+        $dailyNet = $netMonthly / 30;
+        $hourlyNet = $dailyNet / 8;
 
         return [
             'rows' => [
                 ['label' => 'صافي الراتب الشهري', 'value' => $this->money($netMonthly, $currency)],
                 ['label' => 'صافي الراتب السنوي', 'value' => $this->money($netMonthly * 12, $currency)],
+                ['label' => 'إجمالي الراتب قبل الاستقطاعات', 'value' => $this->money($grossMonthly, $currency)],
+                ['label' => 'قيمة الاستقطاعات', 'value' => $this->money($deductionValue, $currency)],
+                ['label' => 'صافي الراتب اليومي', 'value' => $this->money($dailyNet, $currency)],
+                ['label' => 'صافي الراتب لكل ساعة', 'value' => $this->money($hourlyNet, $currency)],
             ],
-            'summary' => 'صافي الراتب الشهري المتوقع هو ' . $this->money($netMonthly, $currency) . '.',
+            'summary' => 'صافي الراتب الشهري المتوقع هو ' . $this->money($netMonthly, $currency) . ' بعد استقطاعات تقدر بحوالي ' . $this->money($deductionValue, $currency) . '.',
         ];
     }
 
@@ -332,12 +384,19 @@ class ToolCalculator
         $start = Carbon::parse($input['start_date']);
         $end = Carbon::parse($input['end_date']);
         $days = $start->diffInDays($end, false);
+        $absoluteDays = abs($days);
+        $weeks = intdiv($absoluteDays, 7);
+        $remainingDays = $absoluteDays % 7;
+        $weekdays = $start->diffInWeekdays($end);
 
         return [
             'rows' => [
-                ['label' => 'عدد الأيام', 'value' => (string) abs($days)],
+                ['label' => 'عدد الأيام', 'value' => (string) $absoluteDays],
+                ['label' => 'المدة بالأسابيع والأيام', 'value' => $this->integer($weeks) . ' أسبوع و' . $this->integer($remainingDays) . ' يوم'],
+                ['label' => 'أيام العمل التقريبية', 'value' => $this->integer($weekdays) . ' يوم'],
+                ['label' => 'الاتجاه الزمني', 'value' => $days >= 0 ? 'التاريخ الثاني بعد الأول' : 'التاريخ الثاني قبل الأول'],
             ],
-            'summary' => 'الفارق بين التاريخين هو ' . abs($days) . ' يوم.',
+            'summary' => 'الفارق بين التاريخين هو ' . $absoluteDays . ' يوم، أي ما يعادل تقريبًا ' . $this->integer($weeks) . ' أسبوع و' . $this->integer($remainingDays) . ' يوم.',
         ];
     }
 
@@ -354,13 +413,18 @@ class ToolCalculator
         }
 
         $minutes = $start->diffInMinutes($end);
+        $hours = intdiv($minutes, 60);
+        $remainingMinutes = $minutes % 60;
+        $seconds = $minutes * 60;
 
         return [
             'rows' => [
-                ['label' => 'الفارق بالساعات', 'value' => floor($minutes / 60) . ' ساعة'],
+                ['label' => 'الفارق بالساعات', 'value' => $hours . ' ساعة'],
                 ['label' => 'الفارق بالدقائق', 'value' => (string) $minutes . ' دقيقة'],
+                ['label' => 'الفارق بالثواني', 'value' => $this->integer($seconds) . ' ثانية'],
+                ['label' => 'الصيغة المختصرة', 'value' => sprintf('%02d:%02d', $hours, $remainingMinutes)],
             ],
-            'summary' => 'الفارق بين الوقتين هو ' . floor($minutes / 60) . ' ساعة و' . ($minutes % 60) . ' دقيقة.',
+            'summary' => 'الفارق بين الوقتين هو ' . $hours . ' ساعة و' . $remainingMinutes . ' دقيقة، أي ' . $this->integer($seconds) . ' ثانية تقريبًا.',
         ];
     }
 
@@ -376,13 +440,22 @@ class ToolCalculator
             $bmi < 30 => 'زيادة وزن',
             default => 'سمنة',
         };
+        $healthyMin = 18.5 * ($heightM * $heightM);
+        $healthyMax = 24.9 * ($heightM * $heightM);
+        $weightNote = match (true) {
+            $weight < $healthyMin => 'تحتاج زيادة تقريبية قدرها ' . number_format($healthyMin - $weight, 1) . ' كجم للوصول إلى الحد الأدنى الصحي',
+            $weight > $healthyMax => 'تحتاج خفضًا تقريبيًا قدره ' . number_format($weight - $healthyMax, 1) . ' كجم للوصول إلى الحد الأعلى الصحي',
+            default => 'وزنك الحالي داخل النطاق الصحي التقريبي',
+        };
 
         return [
             'rows' => [
                 ['label' => 'مؤشر كتلة الجسم', 'value' => number_format($bmi, 1)],
                 ['label' => 'التصنيف', 'value' => $status],
+                ['label' => 'نطاق الوزن الصحي', 'value' => number_format($healthyMin, 1) . ' - ' . number_format($healthyMax, 1) . ' كجم'],
+                ['label' => 'ملاحظة الوزن الحالية', 'value' => $weightNote],
             ],
-            'summary' => 'مؤشر كتلة الجسم لديك هو ' . number_format($bmi, 1) . ' ويصنف على أنه ' . $status . '.',
+            'summary' => 'مؤشر كتلة الجسم لديك هو ' . number_format($bmi, 1) . ' ويصنف على أنه ' . $status . '. الوزن الصحي التقريبي لطولك يقع بين ' . number_format($healthyMin, 1) . ' و' . number_format($healthyMax, 1) . ' كجم.',
         ];
     }
 
@@ -400,12 +473,19 @@ class ToolCalculator
             $months++;
         }
 
+        $savedCapital = $monthly * $months;
+        $investmentGain = $balance - $savedCapital;
+        $targetDate = now()->addMonths($months);
+
         return [
             'rows' => [
                 ['label' => 'عدد الشهور المطلوبة', 'value' => (string) $months],
                 ['label' => 'عدد السنوات التقريبية', 'value' => number_format($months / 12, 1)],
+                ['label' => 'إجمالي المبالغ المدخرة', 'value' => $this->format($savedCapital)],
+                ['label' => 'العائد المتراكم', 'value' => $this->format($investmentGain)],
+                ['label' => 'تاريخ الوصول المتوقع', 'value' => $targetDate->translatedFormat('j F Y')],
             ],
-            'summary' => 'تحتاج تقريبًا إلى ' . $months . ' شهر للوصول إلى هدفك الادخاري.',
+            'summary' => 'تحتاج تقريبًا إلى ' . $months . ' شهر للوصول إلى هدفك الادخاري، مع تاريخ متوقع للوصول في ' . $targetDate->translatedFormat('j F Y') . '.',
         ];
     }
 
@@ -417,13 +497,16 @@ class ToolCalculator
         $variable = (float) ($input['variable_cost'] ?? 0);
         $contribution = $price - $variable;
         $units = $contribution > 0 ? ceil($fixed / $contribution) : 0;
+        $marginRatio = $price > 0 ? ($contribution / $price) * 100 : 0;
 
         return [
             'rows' => [
                 ['label' => 'نقطة التعادل بالوحدات', 'value' => (string) $units],
                 ['label' => 'نقطة التعادل بالمبيعات', 'value' => $this->money($units * $price, $currency)],
+                ['label' => 'هامش المساهمة للوحدة', 'value' => $this->money($contribution, $currency)],
+                ['label' => 'نسبة هامش المساهمة', 'value' => $this->percent($marginRatio)],
             ],
-            'summary' => 'تصل إلى نقطة التعادل بعد بيع ' . $units . ' وحدة تقريبًا.',
+            'summary' => 'تصل إلى نقطة التعادل بعد بيع ' . $units . ' وحدة تقريبًا، مع هامش مساهمة للوحدة يساوي ' . $this->money($contribution, $currency) . '.',
         ];
     }
 
@@ -434,13 +517,16 @@ class ToolCalculator
         $from = (string) data_get($tool->settings, 'from', 'الوحدة');
         $to = (string) data_get($tool->settings, 'to', 'الوحدة');
         $result = $amount * $ratio;
+        $reverseRatio = $ratio > 0 ? 1 / $ratio : 0;
 
         return [
             'rows' => [
                 ['label' => 'المقدار المدخل', 'value' => $this->format($amount) . ' ' . $from],
                 ['label' => 'الناتج', 'value' => $this->format($result) . ' ' . $to],
+                ['label' => 'معدل التحويل', 'value' => '1 ' . $from . ' = ' . $this->format($ratio) . ' ' . $to],
+                ['label' => 'معدل التحويل العكسي', 'value' => '1 ' . $to . ' = ' . $this->format($reverseRatio) . ' ' . $from],
             ],
-            'summary' => $this->format($amount) . ' ' . $from . ' تساوي ' . $this->format($result) . ' ' . $to . '.',
+            'summary' => $this->format($amount) . ' ' . $from . ' تساوي ' . $this->format($result) . ' ' . $to . ' وفق معدل تحويل تقريبي ثابت داخل الأداة.',
         ];
     }
 
