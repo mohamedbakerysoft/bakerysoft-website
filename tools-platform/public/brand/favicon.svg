@@ -1,15 +1,23 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="64" height="64" rx="18" fill="url(#paint0_linear_3_1)"/>
-  <path d="M17 24C17 20.6863 19.6863 18 23 18H35C38.3137 18 41 20.6863 41 24V28H17V24Z" fill="white" fill-opacity="0.96"/>
-  <path d="M17 32H41V43C41 46.3137 38.3137 49 35 49H23C19.6863 49 17 46.3137 17 43V32Z" fill="white" fill-opacity="0.96"/>
-  <rect x="22" y="36" width="5" height="5" rx="1.5" fill="#2563EB"/>
-  <rect x="29" y="36" width="5" height="5" rx="1.5" fill="#2563EB"/>
-  <rect x="22" y="43" width="12" height="3" rx="1.5" fill="#2563EB"/>
-  <path d="M47 18L50.1627 24.4052L57.2306 25.4324L52.1153 30.4174L53.3253 37.4561L47 34.1317L40.6747 37.4561L41.8847 30.4174L36.7694 25.4324L43.8373 24.4052L47 18Z" fill="#F59E0B"/>
+  <rect width="64" height="64" rx="18" fill="url(#bg)"/>
+  <rect x="10.5" y="10.5" width="43" height="43" rx="15" fill="url(#panel)"/>
+  <path d="M35 19C28.3726 19 23 24.3726 23 31C23 37.6274 28.3726 43 35 43" stroke="url(#accent)" stroke-width="6" stroke-linecap="round"/>
+  <rect x="37" y="24" width="8" height="8" rx="2.75" fill="#F8FAFC"/>
+  <rect x="37" y="35" width="8" height="8" rx="2.75" fill="#BAE6FD"/>
+  <path d="M47 15L48.4571 18.5429L52 20L48.4571 21.4571L47 25L45.5429 21.4571L42 20L45.5429 18.5429L47 15Z" fill="#FBBF24"/>
   <defs>
-    <linearGradient id="paint0_linear_3_1" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2563EB"/>
-      <stop offset="1" stop-color="#0F172A"/>
+    <linearGradient id="bg" x1="6" y1="5" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D4ED8"/>
+      <stop offset="0.55" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="13" y1="12" x2="51" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity="0.38"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="23" y1="19" x2="41" y2="43" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#93C5FD"/>
     </linearGradient>
   </defs>
 </svg>

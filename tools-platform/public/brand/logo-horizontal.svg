@@ -1,18 +1,25 @@
-<svg width="360" height="84" viewBox="0 0 360 84" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="360" height="84" rx="24" fill="#F8FAFC"/>
-  <rect x="12" y="12" width="60" height="60" rx="18" fill="url(#paint0_linear_1_1)"/>
-  <path d="M30 28C30 24.6863 32.6863 22 36 22H48C51.3137 22 54 24.6863 54 28V32H30V28Z" fill="white" fill-opacity="0.96"/>
-  <path d="M30 38H54V54C54 57.3137 51.3137 60 48 60H36C32.6863 60 30 57.3137 30 54V38Z" fill="white" fill-opacity="0.96"/>
-  <rect x="35" y="43" width="6" height="6" rx="2" fill="#2563EB"/>
-  <rect x="44" y="43" width="6" height="6" rx="2" fill="#2563EB"/>
-  <rect x="35" y="52" width="15" height="3" rx="1.5" fill="#2563EB"/>
-  <path d="M58 24L61.5 31L69 32L63.5 37L65 44L58 40.2L51 44L52.5 37L47 32L54.5 31L58 24Z" fill="#F59E0B"/>
-  <text x="100" y="43" fill="#0F172A" font-family="Cairo, Arial, sans-serif" font-size="30" font-weight="800">Calclyo</text>
-  <text x="102" y="61" fill="#64748B" font-family="Cairo, Arial, sans-serif" font-size="12" font-weight="700">Arabic Tools Platform</text>
+<svg width="420" height="88" viewBox="0 0 420 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="6" width="76" height="76" rx="24" fill="url(#bg)"/>
+  <rect x="17" y="19" width="50" height="50" rx="18" fill="url(#panel)"/>
+  <path d="M45 28C37.268 28 31 34.268 31 42C31 49.732 37.268 56 45 56" stroke="url(#accent)" stroke-width="7" stroke-linecap="round"/>
+  <rect x="47" y="33" width="10" height="10" rx="3.5" fill="#F8FAFC"/>
+  <rect x="47" y="47" width="10" height="10" rx="3.5" fill="#BAE6FD"/>
+  <path d="M65 21L67.0971 25.9029L72 28L67.0971 30.0971L65 35L62.9029 30.0971L58 28L62.9029 25.9029L65 21Z" fill="#FBBF24"/>
+  <text x="100" y="39" fill="#0F172A" font-family="Cairo, Arial, sans-serif" font-size="31" font-weight="800" letter-spacing="0.5">Calclyo</text>
+  <text x="100" y="62" fill="#475569" font-family="Cairo, Arial, sans-serif" font-size="16" font-weight="700">أدوات ذكية للحساب والتحويل</text>
   <defs>
-    <linearGradient id="paint0_linear_1_1" x1="12" y1="12" x2="72" y2="72" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2563EB"/>
-      <stop offset="1" stop-color="#0F172A"/>
+    <linearGradient id="bg" x1="12" y1="12" x2="72" y2="74" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1D4ED8"/>
+      <stop offset="0.55" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="20" y1="21" x2="64" y2="67" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#0F172A" stop-opacity="0.42"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="31" y1="28" x2="52" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#93C5FD"/>
     </linearGradient>
   </defs>
 </svg>
