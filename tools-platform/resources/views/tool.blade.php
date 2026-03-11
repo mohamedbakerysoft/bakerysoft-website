@@ -43,7 +43,7 @@
                                 >
                             @endif
                             @if (! empty($field['hint']))
-                                <span class="mt-2 block text-xs leading-6 text-slate-500 dark:text-slate-400">{{ $field['hint'] }}</span>
+                                <span class="mt-2 block text-xs leading-6 text-slate-600 dark:text-slate-300">{{ $field['hint'] }}</span>
                             @endif
                         </label>
                     @endforeach
@@ -66,7 +66,7 @@
                         <div class="mt-5 space-y-4">
                             @foreach ($result['rows'] ?? [] as $row)
                                 <div class="flex items-center justify-between gap-4 rounded-2xl bg-slate-50 px-4 py-3 dark:bg-slate-950">
-                                    <span class="text-sm font-semibold text-slate-500 dark:text-slate-400">{{ $row['label'] }}</span>
+                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">{{ $row['label'] }}</span>
                                     <span
                                         class="text-base font-extrabold text-slate-900 dark:text-white"
                                         @if (! empty($row['key']))

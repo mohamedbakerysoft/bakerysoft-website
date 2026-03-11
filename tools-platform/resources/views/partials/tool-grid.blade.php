@@ -8,7 +8,7 @@
             </div>
             <div class="mt-6 flex items-center justify-between gap-3">
                 <a href="{{ route('tool.show', ['categorySlug' => $tool->category->slug_ar, 'toolSlug' => $tool->slug_ar]) }}" class="btn-primary">افتح الأداة</a>
-                <span class="text-xs font-semibold text-slate-400">{{ $tool->typeLabel() }}</span>
+                <span class="text-xs font-semibold text-slate-600 dark:text-slate-300">{{ $tool->typeLabel() }}</span>
             </div>
         </article>
     @endforeach
