@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Tool;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -10,7 +11,10 @@ class CategoryController extends Controller
     public function __invoke(Request $request, string $categorySlug)
     {
         $category = Category::where('slug_ar', $categorySlug)->firstOrFail();
-        $tools = $category->tools()->latest()->paginate(24);
+        $tools = Tool::with('category')
+            ->where('category_id', $category->id)
+            ->popular()
+            ->paginate(24);
         $relatedCategories = Category::whereKeyNot($category->id)->withCount('tools')->get();
         $canonicalUrl = route('category.show', ['categorySlug' => $category->slug_ar]);
 

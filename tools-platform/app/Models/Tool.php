@@ -2,11 +2,56 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 class Tool extends Model
 {
+    private const POPULAR_SLUGS = [
+        'حاسبة-الفائدة-المركبة',
+        'حاسبة-القرض',
+        'حاسبة-العمر',
+        'حاسبة-النسبة-المئوية',
+        'حاسبة-الخصم',
+        'حاسبة-ضريبة-القيمة-المضافة',
+        'حاسبة-مؤشر-كتلة-الجسم',
+        'حاسبة-الراتب',
+        'حاسبة-الأيام-بين-تاريخين',
+        'حاسبة-فرق-الوقت',
+        'حاسبة-هدف-الادخار-الاستثماري',
+        'حاسبة-العائد-السنوي-المركب',
+        'حاسبة-ربح-الأسهم',
+        'حاسبة-ربح-العملات-الرقمية',
+        'حاسبة-هامش-الربح',
+        'حاسبة-قيمة-الذهب',
+        'حاسبة-التضخم',
+        'حاسبة-خطة-الادخار',
+        'حاسبة-نقطة-التعادل',
+    ];
+
+    private const POPULAR_TYPES = [
+        'compound_interest',
+        'loan',
+        'age',
+        'percentage',
+        'discount',
+        'vat',
+        'investment_return',
+        'salary',
+        'days_between',
+        'time_difference',
+        'bmi',
+        'stock_profit',
+        'crypto_profit',
+        'profit_margin',
+        'gold_value',
+        'inflation',
+        'savings_goal',
+        'break_even',
+        'unit_conversion_lookup',
+    ];
+
     public const TYPE_LABELS = [
         'compound_interest' => 'استثمار ونمو',
         'loan' => 'تمويل وقروض',
@@ -65,5 +110,34 @@ class Tool extends Model
     public function typeLabel(): string
     {
         return self::TYPE_LABELS[$this->tool_type] ?? 'أداة عملية';
+    }
+
+    public function scopePopular(Builder $query): Builder
+    {
+        $slugCase = 'CASE';
+        $slugBindings = [];
+
+        foreach (self::POPULAR_SLUGS as $index => $slug) {
+            $slugCase .= ' WHEN slug_ar = ? THEN ' . $index;
+            $slugBindings[] = $slug;
+        }
+
+        $slugCase .= ' ELSE ' . count(self::POPULAR_SLUGS) . ' END';
+
+        $typeCase = 'CASE';
+        $typeBindings = [];
+
+        foreach (self::POPULAR_TYPES as $index => $type) {
+            $typeCase .= ' WHEN tool_type = ? THEN ' . $index;
+            $typeBindings[] = $type;
+        }
+
+        $typeCase .= ' ELSE ' . count(self::POPULAR_TYPES) . ' END';
+
+        return $query
+            ->orderByRaw($slugCase, $slugBindings)
+            ->orderByDesc('is_featured')
+            ->orderByRaw($typeCase, $typeBindings)
+            ->orderBy('name_ar');
     }
 }

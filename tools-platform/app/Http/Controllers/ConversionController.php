@@ -21,11 +21,13 @@ class ConversionController extends Controller
         $category = Category::where('slug_ar', 'المحولات')->first();
         $relatedTools = Tool::with('category')
             ->whereBelongsTo($category)
+            ->popular()
             ->take(6)
             ->get();
         $nearbyConversions = Conversion::where('group_key', $conversion->group_key)
             ->where('from_slug_ar', $conversion->from_slug_ar)
             ->whereKeyNot($conversion->id)
+            ->orderBy('to_unit_ar')
             ->take(8)
             ->get();
         $pageCopy = $this->pageCopy($conversion);

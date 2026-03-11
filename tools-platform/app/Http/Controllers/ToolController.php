@@ -21,7 +21,7 @@ class ToolController extends Controller
         $relatedTools = Tool::with('category')
             ->where('category_id', $category->id)
             ->whereKeyNot($tool->id)
-            ->inRandomOrder()
+            ->popular()
             ->take(6)
             ->get();
 
