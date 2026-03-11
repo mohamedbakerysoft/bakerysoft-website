@@ -12,9 +12,8 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon-96x96.png') . '?v=' . $brandVersion }}" sizes="96x96">
     <link rel="icon" type="image/svg+xml" href="{{ asset('brand/favicon.svg') . '?v=' . $brandVersion }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') . '?v=' . $brandVersion }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="{{ asset('fonts/cairo-arabic.woff2') }}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{{ asset('fonts/cairo-latin.woff2') }}" as="font" type="font/woff2" crossorigin>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7475653835852794" crossorigin="anonymous"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GF64VM5L8V"></script>
     <script>
