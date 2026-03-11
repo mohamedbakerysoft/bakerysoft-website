@@ -45,9 +45,9 @@
         <header class="shell sticky top-0 z-30 pt-4">
             <div class="card-panel flex items-center justify-between gap-4 px-5 py-4 backdrop-blur">
                 <a href="{{ route('home') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="Calclyo" class="hidden h-10 w-auto dark:brightness-110 md:block">
+                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="Calclyo" width="420" height="88" class="hidden h-10 w-auto dark:brightness-110 md:block">
                     <span class="flex items-center gap-3 md:hidden">
-                        <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" class="h-11 w-11 shrink-0 rounded-2xl">
+                        <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" width="96" height="96" class="h-11 w-11 shrink-0 rounded-2xl">
                         <span class="text-lg font-extrabold text-slate-900 dark:text-white">كالكليو</span>
                     </span>
                 </a>
@@ -73,7 +73,7 @@
             <div class="card-panel grid gap-8 px-6 py-8 md:grid-cols-4">
                 <div>
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" class="h-11 w-11 shrink-0 rounded-2xl">
+                        <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" width="96" height="96" class="h-11 w-11 shrink-0 rounded-2xl">
                         <div>
                             <div class="text-lg font-extrabold text-slate-900 dark:text-white">كالكليو</div>
                             <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Calclyo</div>
