@@ -7,10 +7,11 @@
     <meta name="description" content="{{ $metaDescription ?? 'منصة أدوات عربية للحاسبات والمحولات والمال والاستثمار.' }}">
     <meta name="robots" content="{{ $metaRobots ?? 'index,follow' }}">
     <link rel="canonical" href="{{ $canonicalUrl ?? url()->current() }}">
-    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
-    <link rel="icon" type="image/png" href="{{ asset('favicon-96x96.png') }}" sizes="96x96">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('brand/favicon.svg') }}">
-    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
+    @php($brandVersion = '20260311b')
+    <link rel="icon" href="{{ asset('favicon.ico') . '?v=' . $brandVersion }}" sizes="any">
+    <link rel="icon" type="image/png" href="{{ asset('favicon-96x96.png') . '?v=' . $brandVersion }}" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('brand/favicon.svg') . '?v=' . $brandVersion }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') . '?v=' . $brandVersion }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -23,21 +24,8 @@
         gtag('config', 'G-GF64VM5L8V');
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @php
-        $websiteSchema = [
-            '@context' => 'https://schema.org',
-            '@type' => 'WebSite',
-            'name' => 'أدوات Calclyo',
-            'url' => url('/'),
-            'potentialAction' => [
-                '@type' => 'SearchAction',
-                'target' => url('/?q={search_term_string}'),
-                'query-input' => 'required name=search_term_string',
-            ],
-        ];
-    @endphp
     <script type="application/ld+json">
-        {!! json_encode($websiteSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}
+        {"@@context":"https://schema.org","@@type":"WebSite","name":"أدوات Calclyo","url":"{{ url('/') }}","potentialAction":{"@@type":"SearchAction","target":"{{ url('/') }}?q={search_term_string}","query-input":"required name=search_term_string"}}
     </script>
 </head>
 <body x-data="themeToggle" x-init="init">
@@ -45,9 +33,9 @@
         <header class="shell sticky top-0 z-30 pt-4">
             <div class="card-panel flex items-center justify-between gap-4 px-5 py-4 backdrop-blur">
                 <a href="{{ route('home') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="Calclyo" width="420" height="88" class="hidden h-10 w-auto dark:brightness-110 md:block">
+                    <img src="{{ asset('brand/logo-horizontal.svg') . '?v=' . $brandVersion }}" alt="Calclyo" width="420" height="88" class="hidden h-10 w-auto dark:brightness-110 md:block">
                     <span class="flex items-center gap-3 md:hidden">
-                        <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" width="96" height="96" class="h-11 w-11 shrink-0 rounded-2xl">
+                        <img src="{{ asset('brand/logo-mark.svg') . '?v=' . $brandVersion }}" alt="شعار Calclyo" width="96" height="96" class="h-11 w-11 shrink-0 rounded-2xl">
                         <span class="text-lg font-extrabold text-slate-900 dark:text-white">كالكليو</span>
                     </span>
                 </a>
@@ -73,7 +61,7 @@
             <div class="card-panel grid gap-8 px-6 py-8 md:grid-cols-4">
                 <div>
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" width="96" height="96" class="h-11 w-11 shrink-0 rounded-2xl">
+                        <img src="{{ asset('brand/logo-mark.svg') . '?v=' . $brandVersion }}" alt="شعار Calclyo" width="96" height="96" class="h-11 w-11 shrink-0 rounded-2xl">
                         <div>
                             <div class="text-lg font-extrabold text-slate-900 dark:text-white">كالكليو</div>
                             <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Calclyo</div>

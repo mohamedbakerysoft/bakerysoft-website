@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+/* cache-bust: 2026-03-11-b */
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
