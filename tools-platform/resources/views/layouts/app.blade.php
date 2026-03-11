@@ -45,9 +45,11 @@
         <header class="shell sticky top-0 z-30 pt-4">
             <div class="card-panel flex items-center justify-between gap-4 px-5 py-4 backdrop-blur">
                 <a href="{{ route('home') }}" class="flex items-center gap-3">
-                    <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" class="h-11 w-11 shrink-0 rounded-2xl">
-                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="Calclyo" class="hidden h-10 w-auto dark:brightness-110 sm:block">
-                    <span class="text-lg font-extrabold text-slate-900 dark:text-white sm:hidden">أدوات Calclyo</span>
+                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="Calclyo" class="hidden h-10 w-auto dark:brightness-110 md:block">
+                    <span class="flex items-center gap-3 md:hidden">
+                        <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" class="h-11 w-11 shrink-0 rounded-2xl">
+                        <span class="text-lg font-extrabold text-slate-900 dark:text-white">كالكليو</span>
+                    </span>
                 </a>
                 <nav class="hidden items-center gap-5 text-sm font-semibold text-slate-600 dark:text-slate-300 md:flex">
                     <a href="{{ route('category.show', ['categorySlug' => 'ادوات-الاستثمار']) }}">أدوات الاستثمار</a>
@@ -70,7 +72,13 @@
         <footer class="shell pb-10">
             <div class="card-panel grid gap-8 px-6 py-8 md:grid-cols-4">
                 <div>
-                    <img src="{{ asset('brand/logo-horizontal.svg') }}" alt="Calclyo" class="h-10 w-auto max-w-full dark:brightness-110">
+                    <div class="flex items-center gap-3">
+                        <img src="{{ asset('brand/logo-mark.svg') }}" alt="شعار Calclyo" class="h-11 w-11 shrink-0 rounded-2xl">
+                        <div>
+                            <div class="text-lg font-extrabold text-slate-900 dark:text-white">كالكليو</div>
+                            <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Calclyo</div>
+                        </div>
+                    </div>
                     <p class="mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">منصة عربية عملية تساعد المستخدم على الحساب والتحويل بسرعة، مع واجهات واضحة ونتائج قابلة للفهم من أول نظرة.</p>
                 </div>
                 <div>
