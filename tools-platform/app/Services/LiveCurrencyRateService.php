@@ -62,40 +62,47 @@ class LiveCurrencyRateService
             ];
         }
 
-        $cacheKey = "live_currency_rate:{$base}:{$target}";
+        $cacheKey = "live_currency_rate:v2:{$base}:{$target}";
+        $cached = Cache::get($cacheKey);
 
-        return Cache::remember($cacheKey, now()->addHour(), function () use ($base, $target) {
-            try {
-                $response = Http::timeout(4)
-                    ->acceptJson()
-                    ->get(config('services.exchange_rates.base_url') . '/latest/' . $base);
+        if (is_array($cached) && isset($cached['rate'])) {
+            return $cached;
+        }
 
-                if (! $response->successful()) {
-                    return null;
-                }
+        try {
+            $response = Http::timeout(4)
+                ->acceptJson()
+                ->get(config('services.exchange_rates.base_url') . '/latest/' . $base);
 
-                if (data_get($response->json(), 'result') !== 'success') {
-                    return null;
-                }
-
-                $rate = (float) data_get($response->json(), "rates.{$target}");
-
-                if ($rate <= 0) {
-                    return null;
-                }
-
-                return [
-                    'rate' => $rate,
-                    'source' => 'open-er-api',
-                    'fetched_at' => now(),
-                    'effective_date' => $this->parseDate(data_get($response->json(), 'time_last_update_utc')),
-                    'base' => $base,
-                    'target' => $target,
-                ];
-            } catch (Throwable) {
+            if (! $response->successful()) {
                 return null;
             }
-        });
+
+            if (data_get($response->json(), 'result') !== 'success') {
+                return null;
+            }
+
+            $rate = (float) data_get($response->json(), "rates.{$target}");
+
+            if ($rate <= 0) {
+                return null;
+            }
+
+            $payload = [
+                'rate' => $rate,
+                'source' => 'open-er-api',
+                'fetched_at' => now(),
+                'effective_date' => $this->parseDate(data_get($response->json(), 'time_last_update_utc')),
+                'base' => $base,
+                'target' => $target,
+            ];
+
+            Cache::put($cacheKey, $payload, now()->addHour());
+
+            return $payload;
+        } catch (Throwable) {
+            return null;
+        }
     }
 
     private function parseDate(?string $value): ?Carbon
