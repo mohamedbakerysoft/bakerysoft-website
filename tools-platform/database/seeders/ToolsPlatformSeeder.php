@@ -269,13 +269,17 @@ class ToolsPlatformSeeder extends Seeder
                     continue;
                 }
 
+                $ratio = $groupKey === 'currency'
+                    ? ($toFactor / $fromFactor)
+                    : ($fromFactor / $toFactor);
+
                 $rows[] = [
                     'group_key' => $groupKey,
                     'from_unit_ar' => $from,
                     'from_slug_ar' => ArabicSlug::make($from),
                     'to_unit_ar' => $to,
                     'to_slug_ar' => ArabicSlug::make($to),
-                    'ratio' => $fromFactor / $toFactor,
+                    'ratio' => $ratio,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ];
