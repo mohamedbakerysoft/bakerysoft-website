@@ -42,19 +42,28 @@ class ToolCalculator
         };
     }
 
-    public function convertPage(Conversion $conversion, float $amount): array
+    public function convertPage(Conversion $conversion, float $amount, ?array $liveRate = null): array
     {
-        $result = $amount * $conversion->ratio;
-        $reverseRatio = $conversion->ratio > 0 ? (1 / $conversion->ratio) : 0;
+        $effectiveRatio = (float) ($liveRate['rate'] ?? $conversion->ratio);
+        $result = $amount * $effectiveRatio;
+        $reverseRatio = $effectiveRatio > 0 ? (1 / $effectiveRatio) : 0;
+        $usingLiveRate = ($liveRate['source'] ?? null) === 'open-er-api';
+        $fetchedAt = data_get($liveRate, 'fetched_at');
+        $effectiveDate = data_get($liveRate, 'effective_date');
+        $rateNote = $usingLiveRate
+            ? 'سعر حي مرجعي محدث عند الطلب'
+            : 'سعر مرجعي محفوظ كبديل احتياطي';
 
         return [
             'rows' => [
                 ['label' => 'القيمة المدخلة', 'value' => $this->format($amount)],
-                ['label' => 'سعر التحويل', 'value' => '1 ' . $conversion->from_unit_ar . ' = ' . $this->format($conversion->ratio) . ' ' . $conversion->to_unit_ar],
+                ['label' => 'سعر التحويل', 'value' => '1 ' . $conversion->from_unit_ar . ' = ' . $this->format($effectiveRatio) . ' ' . $conversion->to_unit_ar],
                 ['label' => 'الناتج', 'value' => $this->format($result) . ' ' . $conversion->to_unit_ar],
                 ['label' => 'السعر العكسي', 'value' => '1 ' . $conversion->to_unit_ar . ' = ' . $this->format($reverseRatio) . ' ' . $conversion->from_unit_ar],
+                ['label' => 'مصدر السعر', 'value' => $rateNote],
+                ['label' => 'آخر تحديث', 'value' => $effectiveDate ? $effectiveDate->translatedFormat('j F Y - H:i') : ($fetchedAt ? $fetchedAt->translatedFormat('j F Y - H:i') : 'غير متاح')],
             ],
-            'summary' => 'كل ' . $this->format($amount) . ' ' . $conversion->from_unit_ar . ' تساوي ' . $this->format($result) . ' ' . $conversion->to_unit_ar . ' وفق معدل تحويل تقريبي قدره ' . $this->format($conversion->ratio) . '.',
+            'summary' => 'كل ' . $this->format($amount) . ' ' . $conversion->from_unit_ar . ' تساوي ' . $this->format($result) . ' ' . $conversion->to_unit_ar . ' وفق معدل تحويل ' . ($usingLiveRate ? 'حي مرجعي' : 'احتياطي') . ' قدره ' . $this->format($effectiveRatio) . '.',
         ];
     }
 

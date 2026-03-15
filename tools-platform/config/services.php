@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'exchange_rates' => [
+        'base_url' => env('EXCHANGE_RATES_BASE_URL', 'https://open.er-api.com/v6'),
+    ],
+
 ];

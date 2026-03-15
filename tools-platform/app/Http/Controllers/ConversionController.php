@@ -5,19 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Conversion;
 use App\Models\Tool;
+use App\Services\LiveCurrencyRateService;
 use App\Services\ToolCalculator;
 use Illuminate\Http\Request;
 
 class ConversionController extends Controller
 {
-    public function __invoke(Request $request, string $from, string $to, ToolCalculator $calculator)
+    public function __invoke(Request $request, string $from, string $to, ToolCalculator $calculator, LiveCurrencyRateService $liveCurrencyRateService)
     {
         $conversion = Conversion::where('from_slug_ar', $from)
             ->where('to_slug_ar', $to)
             ->firstOrFail();
 
         $amount = (float) $request->query('amount', 1);
-        $result = $calculator->convertPage($conversion, $amount);
+        $liveRate = null;
+
+        if ($conversion->group_key === 'currency') {
+            $liveRate = $liveCurrencyRateService->getRateForArabicUnits($conversion->from_unit_ar, $conversion->to_unit_ar);
+        }
+
+        $result = $calculator->convertPage($conversion, $amount, $liveRate);
         $category = Category::where('slug_ar', 'المحولات')->first();
         $relatedTools = Tool::with('category')
             ->whereBelongsTo($category)
@@ -50,20 +57,20 @@ class ConversionController extends Controller
     {
         if ($conversion->group_key === 'currency') {
             return [
-                'intro' => 'أدخل القيمة التي تريد تحويلها من ' . $conversion->from_unit_ar . ' إلى ' . $conversion->to_unit_ar . ' وستظهر لك نتيجة تقريبية مرجعية مناسبة للمقارنة السريعة، وليست بديلاً عن سعر السوق اللحظي أو سعر التنفيذ البنكي.',
+                'intro' => 'أدخل القيمة التي تريد تحويلها من ' . $conversion->from_unit_ar . ' إلى ' . $conversion->to_unit_ar . ' وستظهر لك نتيجة مرجعية محدثة عند الطلب من مصدر مجاني خفيف، مع fallback احتياطي إذا تعذر الوصول إلى السعر الحي.',
                 'usage' => [
-                    'أدخل المبلغ الذي تريد مراجعته ثم اضغط على زر التحويل للحصول على قيمة تقريبية فورية.',
-                    'هذه الصفحة مناسبة للتقدير السريع أثناء المقارنة أو الدراسة أو التخطيط المالي الأولي، لكنها لا تمثل تسعيرًا مباشرًا من بنك أو وسيط.',
+                    'أدخل المبلغ الذي تريد مراجعته ثم اضغط على زر التحويل للحصول على قيمة مرجعية محدثة عند الطلب.',
+                    'نستخدم سعرًا حيًا مرجعيًا مع كاش قصير لتحسين السرعة وتقليل عدد الطلبات الخارجية، ثم نرجع إلى السعر الاحتياطي المخزن إذا تعذر الوصول إلى المزود.',
                     'إذا كنت تحتاج سعرًا نهائيًا للتنفيذ، فاعتمد على مزود الأسعار أو الجهة المالية التي ستتم عبرها العملية.',
                 ],
                 'faq' => [
                     [
                         'question' => 'هل هذا السعر لحظي؟',
-                        'answer' => 'لا. هذه الصفحة تعرض سعرًا مرجعيًا تقريبيًا لأغراض الحساب والمقارنة السريعة، وقد يختلف عن السعر الفعلي وقت التنفيذ.',
+                        'answer' => 'هو سعر حي مرجعي يتم طلبه عند الحاجة مع كاش قصير لتسريع الأداء. لذلك قد يختلف عن سعر التنفيذ النهائي لدى البنك أو الوسيط.',
                     ],
                     [
                         'question' => 'متى أستخدم هذه الصفحة؟',
-                        'answer' => 'استخدمها عندما تريد تقديرًا سريعًا للمبلغ أو مقارنة أولية بين العملات قبل الرجوع إلى مصدر التسعير المباشر.',
+                        'answer' => 'استخدمها عندما تريد تقديرًا سريعًا للمبلغ أو مقارنة أولية بين العملات قبل الرجوع إلى جهة التنفيذ الفعلية.',
                     ],
                 ],
             ];
