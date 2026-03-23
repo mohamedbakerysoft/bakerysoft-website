@@ -56,6 +56,18 @@ class PlatformPagesTest extends TestCase
         $response->assertSee('noindex,follow');
     }
 
+    public function test_non_priority_conversion_page_is_noindexed(): void
+    {
+        $response = $this->get(route('conversion.show', [
+            'from' => 'أوقية-موريتانية',
+            'to' => 'بات-تايلندي',
+        ]));
+
+        $response->assertOk();
+        $response->assertSee('تحويل أوقية موريتانية إلى بات تايلندي');
+        $response->assertSee('<meta name="robots" content="noindex,follow">', false);
+    }
+
     public function test_static_pages_render(): void
     {
         $this->get(route('about'))
@@ -80,7 +92,9 @@ class PlatformPagesTest extends TestCase
             ->assertHeader('cache-control', 'max-age=3600, public')
             ->assertSee('<?xml version="1.0" encoding="UTF-8"?>', false)
             ->assertSee(route('home'), false)
-            ->assertSee(route('about'), false);
+            ->assertSee(route('about'), false)
+            ->assertSee(route('conversion.show', ['from' => 'دولار-أمريكي', 'to' => 'جنيه-مصري']), false)
+            ->assertDontSee(route('conversion.show', ['from' => 'أوقية-موريتانية', 'to' => 'بات-تايلندي']), false);
 
         $this->get(route('robots'))
             ->assertOk()

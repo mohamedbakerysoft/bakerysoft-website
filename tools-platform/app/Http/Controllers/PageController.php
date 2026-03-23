@@ -85,6 +85,7 @@ class PageController extends Controller
             ]);
 
         $conversionUrls = Conversion::query()
+            ->indexable()
             ->get()
             ->map(fn (Conversion $conversion) => [
                 'loc' => route('conversion.show', ['from' => $conversion->from_slug_ar, 'to' => $conversion->to_slug_ar]),

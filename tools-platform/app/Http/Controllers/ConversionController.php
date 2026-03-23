@@ -48,7 +48,7 @@ class ConversionController extends Controller
             'metaTitle' => 'تحويل ' . $conversion->from_unit_ar . ' إلى ' . $conversion->to_unit_ar . ' | Calclyo',
             'metaDescription' => 'حوّل بسهولة من ' . $conversion->from_unit_ar . ' إلى ' . $conversion->to_unit_ar . ' مع شرح وأمثلة وأسئلة شائعة وروابط داخلية.',
             'canonicalUrl' => route('conversion.show', ['from' => $conversion->from_slug_ar, 'to' => $conversion->to_slug_ar]),
-            'metaRobots' => $request->query() ? 'noindex,follow' : 'index,follow',
+            'metaRobots' => $request->query() || ! $conversion->isIndexable() ? 'noindex,follow' : 'index,follow',
             'pageCopy' => $pageCopy,
         ]);
     }
