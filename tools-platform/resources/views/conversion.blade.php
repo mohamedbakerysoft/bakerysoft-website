@@ -58,6 +58,41 @@
         </div>
     </section>
 
+    @if (! empty($pageCopy['example']) || ! empty($pageCopy['explanation']) || ! empty($pageCopy['mistakes']))
+        <section class="shell pt-12">
+            <div class="grid gap-8 lg:grid-cols-3">
+                @if (! empty($pageCopy['example']) || ! empty($pageCopy['explanation']))
+                    <div class="card-panel px-6 py-8 lg:col-span-2">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">كيف تستفيد من هذه الصفحة؟</h2>
+                        @if (! empty($pageCopy['example']))
+                            <div class="mt-5 rounded-3xl bg-blue-50 px-5 py-5 text-sm leading-8 text-blue-900 dark:bg-blue-950/30 dark:text-blue-100">
+                                <span class="block font-bold">مثال عملي</span>
+                                <span class="mt-2 block">{{ $pageCopy['example'] }}</span>
+                            </div>
+                        @endif
+                        @if (! empty($pageCopy['explanation']))
+                            <div class="mt-5 space-y-4 text-sm leading-8 text-slate-600 dark:text-slate-300">
+                                @foreach ($pageCopy['explanation'] as $paragraph)
+                                    <p>{{ $paragraph }}</p>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                @endif
+                @if (! empty($pageCopy['mistakes']))
+                    <div class="card-panel px-6 py-8">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">أخطاء شائعة</h2>
+                        <div class="mt-5 space-y-3 text-sm leading-8 text-slate-600 dark:text-slate-300">
+                            @foreach ($pageCopy['mistakes'] as $item)
+                                <p>{{ $item }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </section>
+    @endif
+
     <section class="shell pt-12">
         <div class="grid gap-8 lg:grid-cols-2">
             <div class="card-panel px-6 py-8">
@@ -75,6 +110,13 @@
                         <p>{{ $paragraph }}</p>
                     @endforeach
                 </div>
+                @if (! empty($pageCopy['result_insights']))
+                    <div class="mt-5 space-y-3 text-sm leading-8 text-slate-600 dark:text-slate-300">
+                        @foreach ($pageCopy['result_insights'] as $item)
+                            <p>{{ $item }}</p>
+                        @endforeach
+                    </div>
+                @endif
                 @if (! empty($pageCopy['warning']))
                     <div class="mt-6 rounded-3xl bg-amber-50 px-5 py-5 text-sm leading-8 text-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
                         <span class="block font-bold">ملاحظة مهمة</span>
