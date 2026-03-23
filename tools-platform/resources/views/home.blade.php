@@ -4,17 +4,17 @@
     <section class="shell pt-10">
         <div class="grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
             <div class="card-panel px-6 py-8 md:px-10 md:py-12">
-                <span class="chip">منصة عربية متكاملة للحساب والتحويل</span>
-                <h1 class="mt-5 text-4xl font-extrabold leading-tight text-slate-950 dark:text-white md:text-6xl">أدوات عربية واضحة وسريعة تساعدك في المال والاستثمار والتحويلات اليومية</h1>
-                <p class="mt-6 max-w-3xl text-lg leading-9 text-slate-600 dark:text-slate-300">استخدم الحاسبات والمحولات العربية للوصول إلى نتائج دقيقة خلال ثوانٍ، مع واجهة سهلة، نتائج مفهومة، وروابط تقودك إلى أدوات مشابهة بدون تشتيت.</p>
+                <span class="chip">نتيجة سريعة + شرح واضح + أمثلة عملية</span>
+                <h1 class="mt-5 text-4xl font-extrabold leading-tight text-slate-950 dark:text-white md:text-6xl">منصة عربية تساعدك على فهم النتيجة، لا مجرد استخراج رقم</h1>
+                <p class="mt-6 max-w-3xl text-lg leading-9 text-slate-600 dark:text-slate-300">في Calclyo ستجد أدوات للحساب والتحويل والتخطيط المالي مكتوبة بالعربية، مع توضيح متى تستخدم كل أداة وكيف تقرأ الناتج وما الذي يجب الانتباه له قبل اتخاذ القرار.</p>
                 <form action="{{ route('home') }}" method="get" class="mt-8 grid gap-3 md:grid-cols-[1fr_auto]">
                     <input class="field" type="search" name="q" value="{{ $query }}" placeholder="ابحث عن أداة مثل حاسبة الفائدة المركبة أو تحويل الدولار إلى الجنيه المصري">
                     <button class="btn-primary" type="submit">ابحث الآن</button>
                 </form>
                 <div class="mt-8 grid gap-3 text-sm font-semibold text-slate-500 dark:text-slate-400 md:grid-cols-3">
-                    <div class="card-panel px-4 py-4">200+ أداة عربية جاهزة للاستخدام</div>
-                    <div class="card-panel px-4 py-4">5000+ صفحة تحويل ومقارنة</div>
-                    <div class="card-panel px-4 py-4">نتائج واضحة تدعم اتخاذ القرار بسرعة</div>
+                    <div class="card-panel px-4 py-4">أدوات أساسية تخدم المال والاستثمار والاستخدام اليومي</div>
+                    <div class="card-panel px-4 py-4">نتائج تفصيلية مع تفسير يساعدك على المقارنة</div>
+                    <div class="card-panel px-4 py-4">صفحات عربية واضحة مع شرح ومثال وأسئلة شائعة</div>
                 </div>
             </div>
             <div class="grid gap-6">
@@ -31,9 +31,26 @@
         </div>
     </section>
 
+    <section class="shell pt-12">
+        <div class="grid gap-5 md:grid-cols-3">
+            <div class="card-panel px-6 py-6">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white">كيف نستفيد من الأدوات؟</h2>
+                <p class="mt-3 text-sm leading-8 text-slate-600 dark:text-slate-300">كل صفحة لا تكتفي بعرض الناتج، بل تشرح لك أين تستخدم الأداة وكيف تفسر الأرقام وما الأخطاء الشائعة التي قد تفسد القرار.</p>
+            </div>
+            <div class="card-panel px-6 py-6">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white">ما نوع المحتوى الذي ستجده؟</h2>
+                <p class="mt-3 text-sm leading-8 text-slate-600 dark:text-slate-300">نركز على الحاسبات المالية والاستثمارية واليومية وصفحات التحويل، مع أمثلة عملية وسيناريوهات شائعة تناسب المستخدم العربي.</p>
+            </div>
+            <div class="card-panel px-6 py-6">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white">متى نستخدم النتيجة كمؤشر فقط؟</h2>
+                <p class="mt-3 text-sm leading-8 text-slate-600 dark:text-slate-300">بعض الصفحات تعطي تقديرًا مرجعيًا للتخطيط والمقارنة، لذلك نوضح دائمًا أين تكفي النتيجة وأين يلزم الرجوع إلى بنك أو مختص أو جهة تنفيذ.</p>
+            </div>
+        </div>
+    </section>
+
     <section class="shell pt-16">
         <h2 class="section-title">فئات الأدوات</h2>
-        <p class="section-copy">اختر القسم المناسب للوصول بسرعة إلى أدوات المال والاستثمار والمحولات والحاسبات اليومية، مع تنظيم واضح يساعدك على التنقل بسهولة.</p>
+        <p class="section-copy">اختر القسم الذي يطابق احتياجك، وستجد داخله أدوات مرتبة بعناية مع شروحات متخصصة بدل صفحات حسابية جافة أو نتائج مبهمة.</p>
         <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             @foreach ($categories as $category)
                 <a href="{{ route('category.show', ['categorySlug' => $category->slug_ar]) }}" class="tool-card">
@@ -51,7 +68,7 @@
         <div class="flex items-end justify-between gap-4">
             <div>
                 <h2 class="section-title">أدوات مميزة</h2>
-                <p class="section-copy">مجموعة مختارة من الأدوات الأكثر فائدة للمستخدمين في التخطيط المالي والقرارات اليومية والتحويلات الشائعة.</p>
+                <p class="section-copy">هذه صفحات نوصي بالبدء بها لأنها تعطي نتيجة عملية سريعة وتشرح لك كيف تفهمها وتحوّلها إلى قرار أو مقارنة مفيدة.</p>
             </div>
         </div>
         <div class="mt-8">
@@ -61,7 +78,7 @@
 
     <section class="shell pt-16">
         <h2 class="section-title">{{ $query !== '' ? 'نتائج البحث' : 'الأدوات الأكثر طلبًا' }}</h2>
-        <p class="section-copy">{{ $query !== '' ? 'نتائج مطابقة لعبارة البحث التي أدخلتها، ويمكنك فتح أي أداة لبدء الاستخدام مباشرة.' : 'ترتيب ثابت يبدأ بالأدوات الأكثر شهرة واحتياجًا لدى المستخدمين، ثم ينتقل تدريجيًا إلى الأدوات الأقل طلبًا.' }}</p>
+        <p class="section-copy">{{ $query !== '' ? 'نتائج مطابقة لعبارة البحث التي أدخلتها. افتح الأداة المناسبة وستجد داخلها شرحًا واضحًا للمدخلات والنتائج والحالات الشائعة للاستخدام.' : 'هذه الأدوات مرتبة لتبدأ بالأكثر طلبًا وفائدة للمستخدمين، مع صفحات تقدم تفسيرًا للنتيجة بدل الاكتفاء بإخراج رقم فقط.' }}</p>
         <div class="mt-8">
             @include('partials.tool-grid', ['tools' => $tools])
         </div>

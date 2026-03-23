@@ -19,7 +19,11 @@
                 <p class="mt-5 text-lg leading-9 text-slate-600 dark:text-slate-300">{{ $tool->description }}</p>
                 <div class="mt-6 rounded-3xl bg-slate-50 px-5 py-5 text-sm leading-8 text-slate-600 dark:bg-slate-950 dark:text-slate-300">
                     <p class="font-bold text-slate-900 dark:text-white">كيف تستخدم هذه الأداة؟</p>
-                    <p class="mt-2">املأ الحقول المطلوبة بالقيم التقريبية أو الفعلية، ثم اضغط على "احسب الآن" للحصول على نتيجة واضحة وملخص سريع يساعدك على اتخاذ القرار.</p>
+                    <div class="mt-2 space-y-2">
+                        @foreach (data_get($tool->content, 'how_to_use', ['املأ الحقول المطلوبة بالقيم التقريبية أو الفعلية، ثم اضغط على "احسب الآن" للحصول على نتيجة واضحة وملخص سريع يساعدك على اتخاذ القرار.']) as $step)
+                            <p>{{ $step }}</p>
+                        @endforeach
+                    </div>
                 </div>
 
                 <form method="get" class="mt-8 grid gap-4 md:grid-cols-2">
@@ -110,6 +114,12 @@
                     <span class="block font-bold">مثال سريع</span>
                     <span class="mt-2 block">{{ data_get($tool->content, 'example') }}</span>
                 </div>
+                @if (data_get($tool->content, 'note'))
+                    <div class="mt-4 rounded-3xl bg-amber-50 px-5 py-5 text-sm leading-8 text-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
+                        <span class="block font-bold">تنبيه مهم</span>
+                        <span class="mt-2 block">{{ data_get($tool->content, 'note') }}</span>
+                    </div>
+                @endif
             </div>
             <div class="card-panel px-6 py-8">
                 <h2 class="text-2xl font-bold text-slate-900 dark:text-white">الأسئلة الشائعة</h2>
@@ -124,6 +134,43 @@
             </div>
         </div>
     </section>
+
+    @if (data_get($tool->content, 'when_to_use') || data_get($tool->content, 'result_insights') || data_get($tool->content, 'mistakes'))
+        <section class="shell pt-12">
+            <div class="grid gap-8 lg:grid-cols-3">
+                @if (data_get($tool->content, 'when_to_use'))
+                    <div class="card-panel px-6 py-8">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">متى تفيدك هذه الأداة؟</h2>
+                        <div class="mt-5 space-y-3 text-sm leading-8 text-slate-600 dark:text-slate-300">
+                            @foreach (data_get($tool->content, 'when_to_use', []) as $item)
+                                <p>{{ $item }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+                @if (data_get($tool->content, 'result_insights'))
+                    <div class="card-panel px-6 py-8">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">كيف تقرأ النتيجة؟</h2>
+                        <div class="mt-5 space-y-3 text-sm leading-8 text-slate-600 dark:text-slate-300">
+                            @foreach (data_get($tool->content, 'result_insights', []) as $item)
+                                <p>{{ $item }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+                @if (data_get($tool->content, 'mistakes'))
+                    <div class="card-panel px-6 py-8">
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">أخطاء شائعة يجب الانتباه لها</h2>
+                        <div class="mt-5 space-y-3 text-sm leading-8 text-slate-600 dark:text-slate-300">
+                            @foreach (data_get($tool->content, 'mistakes', []) as $item)
+                                <p>{{ $item }}</p>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
+        </section>
+    @endif
 
     <section class="shell pt-12">
         <h2 class="section-title">أدوات مرتبطة</h2>

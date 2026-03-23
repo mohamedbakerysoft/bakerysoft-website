@@ -23,7 +23,7 @@ class PlatformPagesTest extends TestCase
 
         $response->assertOk();
         $response->assertSee('أدوات Calclyo');
-        $response->assertSee('أدوات عربية واضحة وسريعة');
+        $response->assertSee('منصة عربية تساعدك على فهم النتيجة');
         $response->assertSee('<link rel="canonical" href="http://localhost">', false);
         $response->assertSee('<meta name="robots" content="index,follow">', false);
     }

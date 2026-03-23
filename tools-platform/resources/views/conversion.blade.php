@@ -60,6 +60,33 @@
 
     <section class="shell pt-12">
         <div class="grid gap-8 lg:grid-cols-2">
+            <div class="card-panel px-6 py-8">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">متى تستخدم هذه الصفحة؟</h2>
+                <div class="mt-5 space-y-4 text-sm leading-8 text-slate-600 dark:text-slate-300">
+                    @foreach ($pageCopy['when_to_use'] ?? [] as $paragraph)
+                        <p>{{ $paragraph }}</p>
+                    @endforeach
+                </div>
+            </div>
+            <div class="card-panel px-6 py-8">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">كيف تقرأ النتيجة؟</h2>
+                <div class="mt-5 space-y-4 text-sm leading-8 text-slate-600 dark:text-slate-300">
+                    @foreach ($pageCopy['reading'] ?? [] as $paragraph)
+                        <p>{{ $paragraph }}</p>
+                    @endforeach
+                </div>
+                @if (! empty($pageCopy['warning']))
+                    <div class="mt-6 rounded-3xl bg-amber-50 px-5 py-5 text-sm leading-8 text-amber-900 dark:bg-amber-950/30 dark:text-amber-100">
+                        <span class="block font-bold">ملاحظة مهمة</span>
+                        <span class="mt-2 block">{{ $pageCopy['warning'] }}</span>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </section>
+
+    <section class="shell pt-12">
+        <div class="grid gap-8 lg:grid-cols-2">
             <div>
                 <h2 class="section-title">تحويلات مرتبطة</h2>
                 <div class="mt-8 grid gap-4 sm:grid-cols-2">
