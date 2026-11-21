@@ -1,0 +1,33 @@
+name: BakerySoft Brand Source QA
+on:
+  push:
+    branches:
+      - feature/premium-identity-20261121
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  design-system-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Verify brand identity source and acceptance rules
+        run: node tests/brand_identity_source.test.js
+      - name: Install pinned dependencies on hosted runner only
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Compile independent staging build (no deployment)
+        run: npm run build
+      - name: Prevent runtime secrets and databases in source tree
+        shell: bash
+        run: |
+          test ! -e .env
+          test ! -e viewer_auth.json
+          test ! -e factory.sqlite3
+          ! find . -path './node_modules' -prune -o -type f \( -name '*.pem' -o -name '*.key' -o -name '*.sqlite3' \) -print | grep .
