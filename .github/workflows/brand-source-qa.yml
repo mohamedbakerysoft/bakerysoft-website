@@ -20,6 +20,8 @@ jobs:
           cache: npm
       - name: Verify brand identity source and acceptance rules
         run: node tests/brand_identity_source.test.js
+      - name: Check English marketing copy without invented metrics
+        run: node tests/marketing_copy_truth.test.js
       - name: Install pinned dependencies on hosted runner only
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Compile independent staging build (no deployment)

@@ -1,0 +1,13 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');
+const home=fs.readFileSync('src/index.html','utf8'),legacy=fs.readFileSync('src/gitintouch.html','utf8');
+const audit=fs.readFileSync('docs/COPY_AUDIT_EN_AR.md','utf8');
+assert.ok(home.includes('Clear thinking.<br><em>Well-built software.</em>'));
+assert.ok(home.includes('Thoughtful discovery'));
+assert.ok(!home.includes('<b>98</b>')&&!home.includes('>Production ready<'),'no unsubstantiated metric / guarantee');
+assert.ok(!legacy.includes('<title>BackerySoft</title>'));
+assert.ok(legacy.includes('<title>BakerySoft — Get in touch</title>'));
+assert.ok(audit.includes('نفكر بوضوح'));
+assert.ok(audit.includes('not currently rendered'),'do not pretend localized production');
+assert.ok(audit.includes('contactUs/index.php'),'backend mismatch kept as explicit review item');
+console.log('PASS BakerySoft copy: honest hero, no fake 98 score, spelling, Arabic draft clearly separate, backend issue flagged');
