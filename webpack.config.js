@@ -22,6 +22,10 @@ module.exports = {
       template: "./src/gitintouch.html",
       
     }),
+    new HtmlWebpackPlugin({
+      filename:"products.html",
+      template: "./src/products.html",
+    }),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery",

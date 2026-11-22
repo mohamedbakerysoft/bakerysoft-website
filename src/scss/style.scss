@@ -24,3 +24,33 @@ html{color-scheme:light}
 .contact-form{box-shadow:0 20px 65px rgba(9,30,38,.045)}
 @media(max-width:600px){.site-header .button-small{display:inline-flex;min-height:42px;font-size:.73rem;padding:10px 13px}.nav-wrap{gap:13px}.brand img{max-width:min(43vw,165px);height:auto}.hero h1{font-size:clamp(2.85rem,10vw,3.4rem)}}
 @media(prefers-reduced-motion:reduce){.service-card:hover,.button:hover{transform:none!important}}
+
+/* Product evidence pages: verified preview links, no fictitious screenshots. */
+.products-header{background:rgba(246,249,247,.96);border-bottom:1px solid var(--line)}
+.product-hero{padding:175px 0 110px;background:radial-gradient(ellipse at 70% 20%,rgba(22,159,132,.11),transparent 50%),var(--paper)}
+.product-hero h1{max-width:16ch}
+.products-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.product-evidence-card{min-width:0;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 16px 55px rgba(9,30,38,.05)}
+.product-proof-visual{height:238px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:13px;background:linear-gradient(135deg,#123547,#071b2b);color:#abd7d8;font:600 .85rem "Manrope",sans-serif;letter-spacing:.03em;text-align:center;padding:24px}
+.product-proof-visual .proof-icon{font:500 5rem/1 "Manrope",sans-serif;color:#70e0c6}
+.product-proof-pending{background:linear-gradient(135deg,#23353d,#12252c)}
+.product-proof-pending .proof-icon{color:#a6c4c9}
+.product-evidence-body{padding:35px}
+.product-evidence-body h3{font-size:2rem;margin:4px 0 8px}
+.product-evidence-body>p:not(.product-eyebrow){line-height:1.7;color:var(--muted)}
+.product-eyebrow{font-weight:700;color:var(--accent-dark);text-transform:uppercase;font-size:.7rem;letter-spacing:.12em}
+.product-eyebrow.pending{color:#655e55}
+.product-evidence-body .product-type{font-weight:700;color:var(--ink-2)!important;margin:0 0 16px}
+.product-facts{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 29px}
+.product-facts span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--paper);font-size:.73rem;color:#49616c}
+.product-case-inner{display:flex;gap:50px;justify-content:space-between;align-items:center}
+.product-case-inner>*{max-width:650px}
+.product-case-inner h2{font-size:clamp(2rem,3.8vw,3.6rem);margin:0;letter-spacing:-.04em}
+.product-case-inner p:not(.eyebrow){color:var(--muted);line-height:1.7}
+.product-case-studies{background:#e8f2ee}
+.product-home-teaser{background:#edf4f1}
+.product-home-teaser .button{flex-shrink:0}
+.product-contact .button{flex-shrink:0}
+@media(max-width:900px){.products-grid{grid-template-columns:1fr}.product-case-inner{flex-direction:column;align-items:flex-start;gap:23px}.product-hero{padding:145px 0 80px}.product-proof-visual{height:200px}}
+@media(max-width:600px){.product-evidence-body{padding:23px}.product-hero h1{font-size:clamp(2.65rem,10vw,3.8rem)}.product-proof-visual{height:165px}.products-header .desktop-nav{display:none}}
+@media(prefers-reduced-motion:reduce){.product-evidence-card,.product-proof-visual{transition:none!important}}
