@@ -25,7 +25,10 @@ for(const [name,html] of Object.entries(pages)){
    else assert.fail(name+' unexpected local URL '+url);
    if(hash&&rel==='index.html')assert.ok(home.includes('id="'+hash+'"'),name+' missing homepage target '+hash);
   }else if(url.startsWith('http')){
-   assert.equal(url,'https://hdimages.bakerysoft.net/','only confirmed live demo external URL is allowed');
+   // Canonical SEO links are first-party metadata, not demo/purchase CTAs.
+   const approved=new Set(['https://hdimages.bakerysoft.net/',
+     'https://bakerysoft.net/','https://bakerysoft.net/products.html']);
+   assert.ok(approved.has(url),'only first-party canonical metadata and the verified demo may link externally: '+url);
   }
  }
 }
