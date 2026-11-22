@@ -54,3 +54,24 @@ html{color-scheme:light}
 @media(max-width:900px){.products-grid{grid-template-columns:1fr}.product-case-inner{flex-direction:column;align-items:flex-start;gap:23px}.product-hero{padding:145px 0 80px}.product-proof-visual{height:200px}}
 @media(max-width:600px){.product-evidence-body{padding:23px}.product-hero h1{font-size:clamp(2.65rem,10vw,3.8rem)}.product-proof-visual{height:165px}.products-header .desktop-nav{display:none}}
 @media(prefers-reduced-motion:reduce){.product-evidence-card,.product-proof-visual{transition:none!important}}
+
+/* #462: accessible skip navigation, keyboard focus and narrow viewport layout.
+   No claimed Lighthouse score or false organic-search metrics. */
+.skip-link{position:fixed;z-index:1000;top:-95px;left:16px;padding:12px 20px;
+ background:#fff;color:#063e36;border:3px solid var(--focus-ring);
+ border-radius:8px;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,.17)}
+.skip-link:focus-visible{top:12px;outline:3px solid #063e36;outline-offset:3px}
+:where(.desktop-nav a,.text-link,.button):focus-visible{outline:3px solid var(--focus-ring);outline-offset:4px}
+.contact-page-detail{background:#e8f2ee}
+@media(max-width:600px){
+ .nav-wrap{flex-wrap:wrap}
+ .products-header .nav-wrap{gap:12px}
+ .products-header .button-small{min-height:44px}
+ .button,.text-link{min-height:44px}
+ .hero-grid,.product-case-inner,.products-grid{min-width:0}
+ h1,h2,h3,p{overflow-wrap:break-word}
+ input,textarea,select{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+ .site-header,.button,.text-link{transition:none!important}
+}
